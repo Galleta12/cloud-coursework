@@ -3,7 +3,7 @@ var amqp = require('amqplib/callback_api');
 
 //connect to the MQ cluster
 
-amqp.connect('amqp://test:test@127.0.0.1', function(error0, connection) {
+amqp.connect('amqp://test:test@192.168.56.50', function(error0, connection) {
 
     //if connection failed throw error
     if (error0) {
