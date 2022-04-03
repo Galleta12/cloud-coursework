@@ -33,4 +33,3 @@ amqp.connect('amqp://test:test@192.168.56.50', function(error0, connection) {
                               });
             });
 });
-
