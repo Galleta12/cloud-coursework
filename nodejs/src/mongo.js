@@ -85,7 +85,7 @@ setInterval(function() {
 
 
   
-  amqp.connect('amqp://test:test@haproxy_1', function(error0, connection) {
+  amqp.connect('amqp://test:test@192.168.56.50', function(error0, connection) {
         if (error0) {
                 throw error0;
               }
@@ -114,7 +114,7 @@ setInterval(function() {
 function a(){
 var amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://test:test@haproxy_1', function(error0, connection) {
+amqp.connect('amqp://test:test@192.168.56.50', function(error0, connection) {
         if (error0) {
                     throw error0;
                 }
