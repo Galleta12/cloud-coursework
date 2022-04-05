@@ -160,7 +160,7 @@ function save_list(n){
   
   let nodes =[];
 
-  nodes.push({n});
+  nodes.push("xd");
 
   if(nodes.lenght > 4){
     for( var i = i; i < nodes.lenght; i++){
