@@ -11,12 +11,14 @@ const express = require('express')
 //used to parse the server response from json to object.
 const bodyParser = require('body-parser');
 
-var os = require("os");
-var myhostname = os.hostname();
+
 
 //instance of express and port to use for inbound connections.
 const app = express()
 const port = 3000
+
+var os = require("os");
+var myhostname = os.hostname();
 
 //connection string listing the mongo servers. This is an alternative to using a load balancer. THIS SHOULD BE DISCUSSED IN YOUR ASSIGNMENT.
 const connectionString = 'mongodb://localmongo1:27017,localmongo2:27017,localmongo3:27017/NotFLIX?replicaSet=rs0';
@@ -93,7 +95,7 @@ setInterval(function() {
 var amqp = require('amqplib/callback_api');
 
 amqp.connect('amqp://test:test@192.168.56.50', function(error0, connection) {});
-amqp.connect('amqp://test:test@cloud-course-work_haproxy_1', function(error0, connection) {
+amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, connection) {
       if (error0) {
               throw error0;
             }
