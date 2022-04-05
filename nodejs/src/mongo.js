@@ -159,8 +159,8 @@ setTimeout(function(){a()},5000 );
 function save_list(n){
   
   let nodes =[];
-  nodes.push("exd");
-  console.log(nodes.length);
+  nodes.push(n);
+  console.log(nodes);
 
 
 
