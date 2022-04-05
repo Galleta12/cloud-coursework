@@ -162,8 +162,11 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
   
- nodes.push(n);
- console.log("this are the nodes: ", nodes)
+ 
+  nodes.push(n);
+ 
+ 
+ console.log("this are the nodes: ", n["nodeID"])
   
   
 
