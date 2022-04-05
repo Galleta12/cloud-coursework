@@ -79,42 +79,49 @@ app.listen(port, () => {
 })
 
 
+var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
+toSend = {"hostname": myhostname, "status": "alive", "nodeID": nodeID};
+
+
+
+
 setInterval(function() {
 
-  var amqp = require('amqplib/callback_api');
+var amqp = require('amqplib/callback_api');
 
 
-  
-  amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, connection) {
-        if (error0) {
-                throw error0;
-              }
-        connection.createChannel(function(error1, channel) {
-                if (error1) {
-                          throw error1;
-                        }
-                var queue = 'hello';
-                var msg = 'Hello world';
-  
-                channel.assertQueue(queue, {
-                          durable: false
-                        });
-  
-                channel.sendToQueue(queue, Buffer.from(msg));
-                console.log(" [x] Sent %s", msg);
-              });
-      setTimeout(function() {
-                connection.close();
-                process.exit(0)
-                }, 500);
-  });
+amqp.connect('amqp://test:test@cloud-course-work_haproxy_1', function(error0, connection) {
+      if (error0) {
+              throw error0;
+            }
+      connection.createChannel(function(error1, channel) {
+              if (error1) {
+                        throw error1;
+                      }
+              var queue = 'hello';
+              var msg = 'Hello world';
+
+              channel.assertQueue(queue, {
+                        durable: false
+                      });
+
+              //channel.sendToQueue(queue, Buffer.from(msg));
+              channel.sendToQueue(queue, Buffer.from(JSON.stringify(toSend)));
+              console.log(" [x] Sent %s", JSON.stringify(toSend));
+            });
+    setTimeout(function() {
+              connection.close();
+              //process.exit(0)
+              }, 500);
+});
 
 }, 1000);
 
 function a(){
+
 var amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, connection) {
+amqp.connect('amqp://test:test@cloud-course-work_haproxy_1', function(error0, connection) {
         if (error0) {
                     throw error0;
                 }
@@ -138,4 +145,8 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                                             });
                 });
 });
+
 }
+
+setTimeout(function(){a()},5000 );
+
