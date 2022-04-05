@@ -168,7 +168,8 @@ function save_list(node){
     }
   }
   else{
-    console.log(nodes.lenght);
+    var len = nodes.lenght;
+    console.log(len);
   }
 
   
