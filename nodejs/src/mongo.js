@@ -165,7 +165,9 @@ function save_list(n){
  nodes.push(n);
   
  //nodes.some(ids => ids.nodeID === n["nodeID"] ? (nodes.find(e => e.nodeID === n["nodeID"])).status +=1 : nodes.push(n));
-(nodes.find(e => e.nodeID === n["nodeID"])).status += 1;
+ nodes.some(ids => ids.nodeID === n["nodeID"] ? console.log(true) : console.log(falase));
+
+ (nodes.find(e => e.nodeID === n["nodeID"])).status += 1;
  
  console.log("this are the nodes: ", nodes);
   
