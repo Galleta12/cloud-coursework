@@ -167,6 +167,9 @@ function save_list(node){
       console.log("testing: ",nodes[i]);
     }
   }
+  else{
+    console.log(nodes.lenght);
+  }
 
   
   
