@@ -113,7 +113,7 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
               //channel.sendToQueue(queue, Buffer.from(msg));
               channel.sendToQueue(queue, Buffer.from(JSON.stringify(toSend)));
               console.log(" [x] Sent %s", JSON.stringify(toSend));
-              save_list(JSON.stringify(toSend));
+              save_list(toSend);
             });
     setTimeout(function() {
               connection.close();
