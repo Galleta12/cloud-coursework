@@ -29,6 +29,8 @@ setInterval(function() {
 
 }, 3000);
 
+let nodes= [];
+
 //tell express to use the body parser. Note - This function was built into express but then moved to a seperate package.
 app.use(bodyParser.json());
 
@@ -158,10 +160,10 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
   
-  let nodes =[];
-  nodes.push(n);
-  console.log(nodes);
-
+ nodes.push(n);
+ console.log("this are the nodes: ", nodes)
+  
+  
 
 
  
