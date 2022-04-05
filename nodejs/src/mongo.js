@@ -157,6 +157,14 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
 setTimeout(function(){a()},5000 );
 
 function save_list(node){
-  console.log("this is for the node: ",node);
+  
+  if(typeof node == "string"){
+    console.log("this is a string: ",node);
+
+  }else{
+    console.log("this is for the node: ",node);
+  }
+  
+  
 
 }
