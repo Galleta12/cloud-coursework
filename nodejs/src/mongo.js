@@ -162,10 +162,14 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
   
-// nodes.push(n);
+if (!nodes.length){
+nodes.push(n);
+}else{
+  nodes.some(ids => ids.nodeID === n["nodeID"] ?  (nodes.find(e => e.nodeID === n["nodeID"])).status += 1 : nodes.push(n));
+}
   
 
- nodes.some(ids => ids.nodeID === n["nodeID"] ?  (nodes.find(e => e.nodeID === n["nodeID"])).status += 1 : nodes.push(n));
+
 
 
  
