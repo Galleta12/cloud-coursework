@@ -42,10 +42,14 @@ services:
       - "81:3000"
   node2:
     build: ./nodejs
+    volumes:
+      - ./nodejs/src:/usr/src/app/   
     ports:
       - "82:3000"
   node3:
     build: ./nodejs
+    volumes:
+      - ./nodejs/src:/usr/src/app/   
     ports:
       - "83:3000"
   nginx:
