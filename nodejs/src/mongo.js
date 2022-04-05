@@ -158,12 +158,16 @@ setTimeout(function(){a()},5000 );
 
 function save_list(node){
   
-  if(typeof node == "string"){
-    console.log("this is a string: ",node);
+  nodes =[];
 
-  }else{
-    console.log("this is for the node: ",node);
+  nodes.push(node);
+
+  if(nodes.lenght() == 4){
+    for( var i = i; i > nodes.lenght; i++){
+      console.log(nodes[i]);
+    }
   }
+
   
   
 
