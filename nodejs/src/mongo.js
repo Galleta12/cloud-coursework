@@ -158,7 +158,7 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
   
-  nodes =[];
+  let nodes =[];
 
   nodes.push({n});
 
