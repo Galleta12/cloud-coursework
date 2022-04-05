@@ -147,7 +147,7 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
 
                     channel.consume(queue, function(msg) {
-                                    console.log(" [x] Received %s", msg.content.toString());
+                                    console.log(" [x] Received %s", msg.content.toJSON());
                                     save_list(msg.content.toString());
                                 }, {
                                                 noAck: true
