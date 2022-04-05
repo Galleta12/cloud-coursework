@@ -94,7 +94,7 @@ setInterval(function() {
 
 var amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://test:test@192.168.56.50', function(error0, connection) {});
+amqp.connect('amqp://test:test@192.168.56.40', function(error0, connection) {});
 amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, connection) {
       if (error0) {
               throw error0;
