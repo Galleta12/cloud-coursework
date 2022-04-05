@@ -148,7 +148,8 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
 
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
-                                    save_list(JSON.stringify(msg));
+                                    var m = msg.content.toString();
+                                    save_list(JSON.parse(m));
                                 }, {
                                                 noAck: true
                                             });
