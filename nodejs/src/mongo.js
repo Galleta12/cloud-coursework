@@ -11,6 +11,9 @@ const express = require('express')
 //used to parse the server response from json to object.
 const bodyParser = require('body-parser');
 
+var os = require("os");
+var myhostname = os.hostname();
+
 //instance of express and port to use for inbound connections.
 const app = express()
 const port = 3000
@@ -89,7 +92,7 @@ setInterval(function() {
 
 var amqp = require('amqplib/callback_api');
 
-
+amqp.connect('amqp://test:test@192.168.56.50', function(error0, connection) {});
 amqp.connect('amqp://test:test@cloud-course-work_haproxy_1', function(error0, connection) {
       if (error0) {
               throw error0;
@@ -106,7 +109,7 @@ amqp.connect('amqp://test:test@cloud-course-work_haproxy_1', function(error0, co
                       });
 
               //channel.sendToQueue(queue, Buffer.from(msg));
-              channel.sendToQueue(queue, Buffer.from(JSON.stringify(toSend)));
+              channel.sendToQueue(queue, JSON.stringify(toSend));
               console.log(" [x] Sent %s", JSON.stringify(toSend));
             });
     setTimeout(function() {
