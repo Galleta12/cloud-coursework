@@ -162,8 +162,8 @@ function save_list(node){
 
   nodes.push(node);
 
-  if(nodes.lenght() == 4){
-    for( var i = i; i < nodes.lenght; i++){
+  if(nodes.lenght() > 4){
+    for( var i = i; i < nodes.lenght(); i++){
       console.log(nodes[i]);
     }
   }
