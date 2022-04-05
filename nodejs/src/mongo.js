@@ -162,22 +162,21 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
   
-  if(nodes.length != 0){
-
   
-  nodes.some(ids => ids.nodeID === n["nodeID"] ?  (nodes.find(e => e.nodeID === n["nodeID"])).status += 1 : nodes.push(n));
+  if(nodes.some(ids => ids.nodeID === n["nodeID"])){ 
+    nodes.some(ids => ids.nodeID === n["nodeID"] ?  (nodes.find(e => e.nodeID === n["nodeID"])).status += 1 : nodes.push(n));
+    console.log("this are the nodes: ", nodes);
 
-
+  }else{
+    nodes.push(n);
   }
-  else(
-    nodes.push(n)
-  )
+  
 
-  console.log("this are the nodes: ", nodes)
+
 
 
  
- 
+
   
   
 
