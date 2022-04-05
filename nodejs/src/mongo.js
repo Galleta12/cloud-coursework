@@ -162,19 +162,17 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
   
-  if(nodes.some( i => i.nodeID === n["nodeID"])){
-   (nodes.find(e => e.nodeID === n["nodeID"])).status += 1
 
-  }else{
-    nodes.push(n)
-  }
+  nodes.some(ids => ids.nodeID === n["nodeID"] ?  (nodes.find(e => e.nodeID === n["nodeID"])).status += 1 : nodes.push(n) && console.log("this are the nodes: ", nodes));
+
+
   
 
 
 
 
  
- console.log("this are the nodes: ", nodes);
+ 
   
   
 
