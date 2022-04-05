@@ -156,11 +156,11 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
 
 setTimeout(function(){a()},5000 );
 
-function save_list(node){
+function save_list(n){
   
   nodes =[];
 
-  nodes.push(node);
+  nodes.push({n});
 
   if(nodes.lenght > 4){
     for( var i = i; i < nodes.lenght; i++){
