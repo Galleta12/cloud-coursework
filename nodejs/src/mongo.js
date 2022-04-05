@@ -158,19 +158,13 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
   
-  let nodes =[];
+  const nodes =[];
+  nodes.push("exd");
+  console.log(nodes.length);
 
-  nodes.push("xd");
 
-  if(nodes.lenght > 4){
-    for( var i = i; i < nodes.lenght; i++){
-      console.log("testing: ",nodes[i]);
-    }
-  }
-  else{
-    var len = nodes.lenght;
-    console.log(len);
-  }
+
+ 
 
   
   
