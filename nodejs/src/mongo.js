@@ -206,6 +206,7 @@ setInterval(function() {
   }else{
     console.log("This is not the leader: ", toSend);
   }
+  console.log(systemLeader);
   
  
 }, 8000);
