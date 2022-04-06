@@ -88,7 +88,13 @@ app.listen(port, () => {
 
 
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
-toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID};
+
+
+
+var date = new Date;
+var date_time= new date.getHours();
+var minutes = new date.getMinutes();
+toSend = {"hostname": myhostname, "time": date_time + ":" + minutes, "nodeID": nodeID};
 
 
 
@@ -162,9 +168,14 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
 setTimeout(function(){a()},5000 );
 
 function save_list(n){
+
+  var today = new Date;
+  var date_node= new today.getHours();
+  var minutes_node = new today.getMinutes();
+
   n.leader = false;
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-    (nodes.find(e => e.nodeID === n["nodeID"])).status += 1;
+    (nodes.find(e => e.nodeID === n["nodeID"])).time = date_node + ":" + minutes_node;
  
    }else{
      if(!nodes.includes(n["nodeID"]) && !nodes.includes(n["myhostname"]) && nodes.length <= 3 ){
