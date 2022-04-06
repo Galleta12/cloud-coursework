@@ -184,7 +184,7 @@ for(var i = 0; i < nodes.length; i++ ){
     max = nodes[i];
   }
 }
-if(toSend == max){
+if(toSend.nodeID === max.nodeID){
   systemLeader = true;
  
 }
@@ -197,6 +197,8 @@ setInterval(function() {
   console.log("what");
   //console.log(toSend.nodeID);
   //console.log("this is the leader", leadership());
+  console.log("this is the leader", leadership().nodeID);
+  console.log("this is the leadersss", toSend.nodeID);
 
 
   if (systemLeader == true){
