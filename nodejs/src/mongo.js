@@ -89,8 +89,8 @@ app.listen(port, () => {
 
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
 
-const d = new Date();
-let text = d.getFullYear() + "/"+ d.getDate() + "/" + d.getHours()+":" + d.getMinutes();
+var d = new Date();
+var text = d.getFullYear() + ":"+ d.getDate() + ":" + d.getHours()+":" + d.getMinutes();
 
 
 toSend = {"hostname": myhostname, "time": text, "nodeID": nodeID};
@@ -168,8 +168,8 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
 
-  const ds = new Date();
-  let texts = ds.getFullYear() + "/"+ ds.getDate() + "/" + ds.getHours()+":" + ds.getMinutes();
+  var ds = new Date();
+  var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
 
   
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
@@ -240,7 +240,7 @@ function check_nodes(current){
   
 
   var current_node_time = String(current.time)
-  var current_node_time_list = current_node_time.split('/',':');
+  var current_node_time_list = current_node_time.split(':');
 
 
   console.log("this is the time of the node that may be dead", current_node_time);
