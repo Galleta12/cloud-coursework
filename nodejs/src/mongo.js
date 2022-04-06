@@ -87,7 +87,7 @@ app.listen(port, () => {
 
 
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
-toSend = {"hostname": myhostname, "status": 1, "nodeID": nodeID};
+toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID};
 
 
 
@@ -172,18 +172,5 @@ function save_list(n){
 
    console.log("this please :", nodes);
 
-
-
-
- 
-
-  
-  
-
-
- 
-
-  
-  
 
 }
