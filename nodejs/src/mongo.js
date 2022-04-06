@@ -177,11 +177,13 @@ function save_list(n){
  
    }
      else  {
-      if(!nodes.hostname.includes(n["hostname"])) {
-      
-        nodes.push(n);
-      
+      for(var i = 0; i < nodes.length; i++ ){
+        if(nodes[i].hostname != n["hostname"]){
+         nodes.push(n);
+        }
       }
+      
+        
      
     }
    
