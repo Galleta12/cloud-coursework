@@ -197,6 +197,8 @@ setInterval(function() {
 
   if (systemLeader == 1){
     console.log("This is the leader: ", toSend);
+  }else{
+    console.log("This is not the leader: ", toSend);
   }
  
 }, 6000);
