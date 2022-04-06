@@ -176,7 +176,7 @@ function save_list(n){
     (nodes.find(e => e.nodeID === n["nodeID"])).time = texts;
  
    }else{
-     if(!nodes.includes(n["nodeID"]) && !nodes.includes(n["myhostname"]) ){
+     if(!nodes.includes(n["myhostname"]) ){
 
     
      nodes.push(n);
