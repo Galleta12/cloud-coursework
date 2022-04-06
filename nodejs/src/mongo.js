@@ -229,7 +229,7 @@ function this_leader(){
   if(nodes.some( h => h.hostname === myhostname) && leadership().hostname == myhostname ){
   
     console.log("U are on the current leader", toSend);
-    current_leader = toSend;
+    current_leader = leadership();
     check_nodes(current_leader);
 
 
@@ -239,8 +239,8 @@ function this_leader(){
 function check_nodes(current){
   
 
-  const current_node_time = String(current.time)
-  var current_node_time_list = current_node_time.split('/');
+  var current_node_time = String(current.time)
+  var current_node_time_list = current_node_time.split('/',':');
 
 
   console.log("this is the time of the node that may be dead", current_node_time);
