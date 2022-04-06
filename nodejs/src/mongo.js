@@ -177,7 +177,7 @@ function save_list(n){
  
    }
      else  {
-      if(!nodes.includes(n["nodeID"]) && !nodes.includes(n["hostname"]) && nodes.length <= 3 ){
+      if(!nodes.includes(n["nodeID"]) && !nodes.includes(n["hostname"]) && nodes.length < 3 ){
       nodes.push(n);
       }
       
