@@ -190,7 +190,8 @@ return max;
 
 setInterval(function() {
 
-  console.log("what")
+  console.log("what");
+  console.log(toSend.nodeID);
   if(toSend.nodeID == leadership()){
     systemLeader = 1;
   }
