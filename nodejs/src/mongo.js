@@ -31,7 +31,7 @@ setInterval(function() {
 
 let nodes= [];
 
-systemLeader = 0;
+systemLeader = false;
 //tell express to use the body parser. Note - This function was built into express but then moved to a seperate package.
 app.use(bodyParser.json());
 
@@ -184,6 +184,10 @@ for(var i = 0; i < nodes.length; i++ ){
     max = nodes[i];
   }
 }
+if(toSend.nodeID == max){
+  systemLeader = true;
+ 
+}
 return max;  
 }
 
@@ -192,13 +196,10 @@ setInterval(function() {
 
   console.log("what");
   console.log(toSend.nodeID);
-  //console.log(leadership());
-  var this_is_leader = leadership();
-  if(toSend.nodeID == this_is_leader){
-    systemLeader = 1;
-  }
+  console.log("this is the leader", leadership());
 
-  if (systemLeader == 1){
+
+  if (systemLeader == true){
     console.log("This is the leader: ", toSend);
   }else{
     console.log("This is not the leader: ", toSend);
