@@ -88,7 +88,7 @@ app.listen(port, () => {
 
 
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
-toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID, "leader": false};
+toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID};
 
 
 
@@ -187,10 +187,6 @@ for(var i = 0; i < nodes.length; i++ ){
     max = nodes[i];
   }
 }
-
-  
-
-
 return max; 
 }
 
