@@ -93,7 +93,7 @@ const d = new Date();
 let text = d.getFullYear() + "/"+ d.getDate() + "/" + d.getHours()+":" + d.getMinutes();
 
 
-toSend = {"hostname": myhostname, "time": text, "nodeID": nodeID};
+toSend = {"hostname": myhostname, "time": [text,d], "nodeID": nodeID};
 
 
 
@@ -173,7 +173,7 @@ function save_list(n){
 
   
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-    (nodes.find(e => e.nodeID === n["nodeID"])).time = texts;
+    (nodes.find(e => e.nodeID === n["nodeID"])).time = [texts,ds];
  
    }else{
      if(!nodes.includes(n["myhostname"]) ){
@@ -229,5 +229,14 @@ function this_leader(){
   if(nodes.some( h => h.hostname === myhostname) && leadership().hostname == myhostname ){
   
     console.log("U are on the current leader", toSend);
+    current_leader = toSend;
+    check_nodes(current_leader);
+
+
   }
+}
+
+function check_nodes(current){
+  current_node_time = current.time
+  console.log("this is the time of the node that may be dead", current_node_time);
 }
