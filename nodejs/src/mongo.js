@@ -186,11 +186,9 @@ for(var i = 0; i < nodes.length; i++ ){
 }
 
   
-if(nodes.some( i => i.nodeID === max["nodeID"])){
-  (nodes.find(e => e.nodeID === max["nodeID"])).leader = true;
 
- }
-return nodes.find(f => f.leader === true); 
+
+return max; 
 }
 
 
@@ -200,6 +198,13 @@ setInterval(function() {
   //console.log(toSend.nodeID);
   //console.log("this is the leader", leadership());
   console.log("this is the leader", leadership());
+  for(var i = 0; i < nodes.length; i++ ){
+    if(leadership() === nodes[i]){
+      nodes[i].leader = true;
+    }
+  }
+
+  
   // console.log("this is the leadersss", toSend.nodeID);
 
 
