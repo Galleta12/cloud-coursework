@@ -201,8 +201,10 @@ setInterval(function() {
   for(var i = 0; i < nodes.length; i++ ){
     if(leadership() === nodes[i]){
       nodes[i].leader = true;
+      toSend.leader = true;
     }else{
       nodes[i].leader = false;
+      
     }
   }
 
