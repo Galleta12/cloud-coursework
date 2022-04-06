@@ -93,7 +93,7 @@ var d = new Date();
 var text = d.getFullYear() + ":"+ d.getDate() + ":" + d.getHours()+":" + d.getMinutes();
 
 
-toSend = {"hostname": myhostname, "time": [text,d], "nodeID": nodeID};
+toSend = {"hostname": myhostname, "time": d, "nodeID": nodeID};
 
 
 
@@ -173,7 +173,7 @@ function save_list(n){
 
   
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-    (nodes.find(e => e.nodeID === n["nodeID"])).time = [texts,ds];
+    (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
  
    }else{
      if(!nodes.includes(n["myhostname"]) ){
