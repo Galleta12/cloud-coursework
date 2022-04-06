@@ -177,7 +177,7 @@ function save_list(n){
  
    }
      else  {
-      if(nodes.some( i => i.hostname =! n["hostname"]) ) {
+      if(!nodes.hostname.includes(n["hostname"])) {
       
         nodes.push(n);
       
