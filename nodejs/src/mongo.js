@@ -91,9 +91,9 @@ var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
 
 
 
-var date = new Date;
-var date_time= new date.getHours();
-var minutes = new date.getMinutes();
+var dates = new Date;
+var date_time= new dates.getHours();
+var minutes = new dates.getMinutes();
 toSend = {"hostname": myhostname, "time": date_time + ":" + minutes, "nodeID": nodeID};
 
 
