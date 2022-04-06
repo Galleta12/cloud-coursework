@@ -239,8 +239,8 @@ function this_leader(){
 function check_nodes(current){
   
 
-  var current_node_time = current.time
-  var current_node_time_list = current.time.split("/",":");
+  const current_node_time = String(current.time)
+  var current_node_time_list = current_node_time.split('/');
 
 
   console.log("this is the time of the node that may be dead", current_node_time);
