@@ -201,7 +201,7 @@ setInterval(function() {
   for(var i = 0; i < nodes.length; i++ ){
     if(leadership() === nodes[i]){
       nodes[i].leader = true;
-      toSend.leader = true;
+      
     }else{
       nodes[i].leader = false;
       
@@ -218,11 +218,9 @@ this_leader();
 function this_leader(){
  
   
-  if(nodes.some( h => h.hostname === myhostname)){
-   if (nodes.find(g => g.leader === true)){
-       console.log("this is the leader node", toSend);
-       console.log("this is the host node",myhostname);
-   }
+  if(nodes.some( h => h.hostname === myhostname) && leadership().hostname == myhostname ){
+    console.log("This is the leader", toSend);
+  
     
   }
 
