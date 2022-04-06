@@ -192,8 +192,9 @@ setInterval(function() {
 
   console.log("what");
   console.log(toSend.nodeID);
-  console.log(leadership());
-  if(toSend.nodeID == leadership()){
+  //console.log(leadership());
+  var this_is_leader = leadership();
+  if(toSend.nodeID == this_is_leader){
     systemLeader = 1;
   }
 
@@ -202,5 +203,6 @@ setInterval(function() {
   }else{
     console.log("This is not the leader: ", toSend);
   }
+  console.log("this is system leader", systemLeader)
  
 }, 8000);
