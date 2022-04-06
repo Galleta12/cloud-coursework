@@ -177,7 +177,7 @@ function save_list(n){
  
    }
      else  {
-      if(nodes.some( i => i.nodeID =! n["hostname"]) ) {
+      if(nodes.some( i => i.hostname =! n["hostname"]) ) {
       
         nodes.push(n);
       
