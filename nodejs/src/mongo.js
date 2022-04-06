@@ -178,8 +178,11 @@ function save_list(n){
    }else{
      if(!nodes.includes(n["myhostname"]) ){
 
+      if(!nodes.some( i => i.myhostname === n["myhostname"])){
+        nodes.push(n);
+      }
     
-     nodes.push(n);
+     
     }
    }
 
