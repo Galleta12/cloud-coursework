@@ -192,6 +192,7 @@ setInterval(function() {
 
   console.log("what");
   console.log(toSend.nodeID);
+  console.log(leadership());
   if(toSend.nodeID == leadership()){
     systemLeader = 1;
   }
