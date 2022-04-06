@@ -88,7 +88,7 @@ app.listen(port, () => {
 
 
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
-toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID, "leader": false, "mycurrentleader": false};
+toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID, "leader": false};
 
 
 
@@ -226,8 +226,5 @@ function this_leader(){
     console.log("U are on the current leader", toSend);
 
     
-  }else {
-    toSend.mycurrentleader = false;
   }
-
 }
