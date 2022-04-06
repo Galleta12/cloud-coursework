@@ -201,4 +201,4 @@ setInterval(function() {
     console.log("This is not the leader: ", toSend);
   }
  
-}, 6000);
+}, 8000);
