@@ -88,7 +88,7 @@ app.listen(port, () => {
 
 
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
-toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID};
+toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID, "leader": false};
 
 
 
@@ -184,11 +184,13 @@ for(var i = 0; i < nodes.length; i++ ){
     max = nodes[i];
   }
 }
-if(toSend.nodeID === max.nodeID){
-  systemLeader = true;
- 
-}
-return max;  
+
+  
+if(nodes.some( i => i.nodeID === max["nodeID"])){
+  (nodes.find(e => e.nodeID === max["nodeID"])).leader = true;
+
+ }
+return nodes.find(f => f.leader === true); 
 }
 
 
@@ -197,18 +199,18 @@ setInterval(function() {
   console.log("what");
   //console.log(toSend.nodeID);
   //console.log("this is the leader", leadership());
-  console.log("this is the leader", leadership().nodeID);
-  console.log("this is the leadersss", toSend.nodeID);
+  console.log("this is the leader", leadership());
+  // console.log("this is the leadersss", toSend.nodeID);
 
 
-  if (systemLeader == true){
-    console.log(systemLeader);
-    console.log("This is the leader: ", leadership());
-    //console.log("This is the leader: ", toSend);
-  }else{
-    console.log("This is not the leader: ", toSend);
-  }
-  console.log(systemLeader);
+  // if (systemLeader == true){
+  //   console.log(systemLeader);
+  //   console.log("This is the leader: ", leadership());
+  //   //console.log("This is the leader: ", toSend);
+  // }else{
+  //   console.log("This is not the leader: ", toSend);
+  // }
+  // console.log(systemLeader);
   
  
 }, 8000);
