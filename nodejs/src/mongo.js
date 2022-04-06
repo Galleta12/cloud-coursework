@@ -168,7 +168,7 @@ function save_list(n){
     (nodes.find(e => e.nodeID === n["nodeID"])).status += 1;
  
    }else{
-     nodes.push(n);
+     nodes.push(n.myxd= "xd");
    }
 
    console.log("this are the nodes :", nodes);
@@ -197,7 +197,7 @@ setInterval(function() {
   console.log("what");
   //console.log(toSend.nodeID);
   //console.log("this is the leader", leadership());
-  console.log("this is the leader", leadership());
+  console.log("this is the leader in the list of nodes", leadership());
   for(var i = 0; i < nodes.length; i++ ){
     if(leadership() === nodes[i]){
       nodes[i].leader = true;
@@ -219,8 +219,7 @@ function this_leader(){
  
   
   if(nodes.some( h => h.hostname === myhostname) && leadership().hostname == myhostname ){
-    console.log("This is the leader", toSend);
-  
+    console.log("U are on the current leader", toSend);
     
   }
 
