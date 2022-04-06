@@ -171,12 +171,12 @@ function save_list(n){
   const ds = new Date();
   let texts = ds.getFullYear() + "/"+ ds.getDate() + "/" + ds.getHours()+":" + ds.getMinutes();
 
-  n.leader = false;
+  
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
     (nodes.find(e => e.nodeID === n["nodeID"])).time = texts;
  
    }else{
-     if(!nodes.includes(n["nodeID"]) && !nodes.includes(n["myhostname"]) && nodes.length <= 3 ){
+     if(!nodes.includes(n["nodeID"]) && !nodes.includes(n["myhostname"]) && nodes.length < 3 ){
 
     
      nodes.push(n);
