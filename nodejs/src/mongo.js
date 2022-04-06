@@ -222,9 +222,7 @@ function this_leader(){
  
   
   if(nodes.some( h => h.hostname === myhostname) && leadership().hostname == myhostname ){
-    toSend.mycurrentleader = true;
+  
     console.log("U are on the current leader", toSend);
-
-    
   }
 }
