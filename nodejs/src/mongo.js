@@ -240,9 +240,10 @@ function check_nodes(current){
   
 
   var current_node_time = current.time
-  var current_node_time_list = current.time.split("/:")
+  var current_node_time_list = current.time.split("/",":");
 
 
   console.log("this is the time of the node that may be dead", current_node_time);
   console.log("Plaese work time", current_node_time_list);
+  console.log("Plaese work time", typeof current_node_time);
 }
