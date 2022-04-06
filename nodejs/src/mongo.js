@@ -177,10 +177,8 @@ function save_list(n){
  
    }
      else  {
-      for(var i = 0; i < nodes.length; i++ ){
-        if(nodes[i].hostname != n["hostname"]){
-         nodes.push(n);
-        }
+      if(!nodes.includes(n["nodeID"]) && !nodes.includes(n["hostname"]) && nodes.length <= 3 ){
+      nodes.push(n);
       }
       
         
@@ -247,7 +245,7 @@ function check_nodes(current){
   var current_node_time = current.time[1];
   var date1 = moment(current_node_time);
   var date2 = moment(dss);
-  var diff = date2.diff(date1);
+  var diff = date2.diff(date1,'minutes');
 
 
   console.log("this is the time of the node that may be dead", current_node_time);
