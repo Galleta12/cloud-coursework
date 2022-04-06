@@ -89,12 +89,11 @@ app.listen(port, () => {
 
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
 
+const d = new Date();
+let text = d.getFullYear() + "/"+ d.getDate() + "/" + d.getHours()+":" + d.getMinutes();
 
 
-var dates = new Date;
-var date_time= new dates.getHours();
-var minutes = new dates.getMinutes();
-toSend = {"hostname": myhostname, "time": date_time + ":" + minutes, "nodeID": nodeID};
+toSend = {"hostname": myhostname, "time": text, "nodeID": nodeID};
 
 
 
@@ -169,13 +168,12 @@ setTimeout(function(){a()},5000 );
 
 function save_list(n){
 
-  var today = new Date;
-  var date_node= new today.getHours();
-  var minutes_node = new today.getMinutes();
+  const ds = new Date();
+  let texts = ds.getFullYear() + "/"+ ds.getDate() + "/" + ds.getHours()+":" + ds.getMinutes();
 
   n.leader = false;
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-    (nodes.find(e => e.nodeID === n["nodeID"])).time = date_node + ":" + minutes_node;
+    (nodes.find(e => e.nodeID === n["nodeID"])).time = texts;
  
    }else{
      if(!nodes.includes(n["nodeID"]) && !nodes.includes(n["myhostname"]) && nodes.length <= 3 ){
