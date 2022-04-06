@@ -162,13 +162,16 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
 setTimeout(function(){a()},5000 );
 
 function save_list(n){
-  
-  
+ 
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
     (nodes.find(e => e.nodeID === n["nodeID"])).status += 1;
  
    }else{
+     if(!nodes.includes(n["nodeID"])){
+
+    
      nodes.push(n);
+    }
    }
 
    console.log("this are the nodes :", nodes);
