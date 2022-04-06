@@ -195,15 +195,17 @@ return max;
 setInterval(function() {
 
   console.log("what");
-  console.log(toSend.nodeID);
-  console.log("this is the leader", leadership());
+  //console.log(toSend.nodeID);
+  //console.log("this is the leader", leadership());
 
 
   if (systemLeader == true){
-    console.log("This is the leader: ", toSend);
+    console.log(systemLeader);
+    console.log("This is the leader: ", leadership());
+    //console.log("This is the leader: ", toSend);
   }else{
     console.log("This is not the leader: ", toSend);
   }
-  console.log("this is system leader", systemLeader)
+  
  
 }, 8000);
