@@ -184,7 +184,7 @@ for(var i = 0; i < nodes.length; i++ ){
     max = nodes[i];
   }
 }
-if(toSend.nodeID === max){
+if(toSend.nodeID === max.nodeID){
   systemLeader = true;
  
 }
