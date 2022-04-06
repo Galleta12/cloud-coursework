@@ -88,7 +88,7 @@ app.listen(port, () => {
 
 
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
-toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID, "leader": false};
+toSend = {"hostname": myhostname, "status": 0, "nodeID": nodeID, "leader": false, "mycurrentleader": false};
 
 
 
@@ -168,7 +168,7 @@ function save_list(n){
     (nodes.find(e => e.nodeID === n["nodeID"])).status += 1;
  
    }else{
-     nodes.push(n.myxd= "xd");
+     nodes.push(n);
    }
 
    console.log("this are the nodes :", nodes);
@@ -219,8 +219,12 @@ function this_leader(){
  
   
   if(nodes.some( h => h.hostname === myhostname) && leadership().hostname == myhostname ){
+    toSend.mycurrentleader = true;
     console.log("U are on the current leader", toSend);
+
     
+  }else {
+    toSend.mycurrentleader = false;
   }
 
 }
