@@ -164,7 +164,7 @@ setTimeout(function(){a()},5000 );
 function save_list(n){
   
   
-  if(nodes.some( i => i.nodeID === n["nodeID"])){
+  if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
     (nodes.find(e => e.nodeID === n["nodeID"])).status += 1;
  
    }else{
