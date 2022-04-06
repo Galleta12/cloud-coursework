@@ -93,7 +93,7 @@ var d = new Date();
 var text = d.getFullYear() + ":"+ d.getDate() + ":" + d.getHours()+":" + d.getMinutes();
 
 
-toSend = {"hostname": myhostname, "time": text, "nodeID": nodeID};
+toSend = {"hostname": myhostname, "time": [text,d], "nodeID": nodeID};
 
 
 
@@ -173,7 +173,7 @@ function save_list(n){
 
   
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-    (nodes.find(e => e.nodeID === n["nodeID"])).time = texts;
+    (nodes.find(e => e.nodeID === n["nodeID"])).time = [texts,ds];
  
    }else{
      if(!nodes.includes(n["myhostname"]) ){
@@ -238,12 +238,14 @@ function this_leader(){
 
 function check_nodes(current){
   
-
-  var current_node_time = String(current.time)
-  var current_node_time_list = current_node_time.split(':');
+  var dss = new Date();
+  var current_node_time = current.time[1];
+  var date1 = moment(current_node_time);
+  var date2 = moment(dss);
+  var diff = date2.diff(date1);
 
 
   console.log("this is the time of the node that may be dead", current_node_time);
-  console.log("Plaese work time", current_node_time_list);
-  console.log("Plaese work time", typeof current_node_time);
+  console.log("Plaese work time", diff);
+  
 }
