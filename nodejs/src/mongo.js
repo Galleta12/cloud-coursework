@@ -171,7 +171,7 @@ function save_list(n){
      nodes.push(n);
    }
 
-   console.log("this please :", nodes);
+   console.log("this are the nodes :", nodes);
 
 
 }
@@ -206,18 +206,22 @@ setInterval(function() {
     }
   }
 
-  
-  // console.log("this is the leadersss", toSend.nodeID);
+this_leader();
 
-
-  // if (systemLeader == true){
-  //   console.log(systemLeader);
-  //   console.log("This is the leader: ", leadership());
-  //   //console.log("This is the leader: ", toSend);
-  // }else{
-  //   console.log("This is not the leader: ", toSend);
-  // }
-  // console.log(systemLeader);
   
+
  
 }, 8000);
+
+function this_leader(){
+ 
+  
+  if(nodes.some( h => h.hostname === myhostname)){
+   if (nodes.find(g => g.leader === true)){
+       console.log("this is the leader node", toSend);
+       console.log("this is the host node",myhostname);
+   }
+    
+  }
+
+}
