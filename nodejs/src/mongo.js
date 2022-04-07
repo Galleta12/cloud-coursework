@@ -195,12 +195,17 @@ function save_list(n){
 function check_duplicate(n){
   console.log("this remove duplicate");
   var checker = false;
+  
+  if(typeof nodes !== 'undefined'){
   for (var i=0; i < nodes.length; i++) {
     if (nodes[i].hostname === n.hostname) {
         checker = true;
     }
     checker = false;
 }
+  }else{
+    checker = false;
+  }
 
 return checker
   
