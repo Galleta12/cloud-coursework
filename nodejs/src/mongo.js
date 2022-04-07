@@ -1,7 +1,7 @@
 
 //Object data modelling library for mongo
 const mongoose = require('mongoose');
-import moment from 'moment';
+
 
 //Mongo db client library
 //const MongoClient  = require('mongodb');
