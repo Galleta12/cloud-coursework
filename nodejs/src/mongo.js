@@ -193,16 +193,19 @@ function save_list(n){
 
 
 function check_duplicate(n){
- nodes.find((o, i) => {
+  console.log("this remove duplicate");
+  var checker = false;
+  nodes.find((o, i) => {
+    console.log("this remove duplicate");
     if (o.hostname === n["hostname"] ) {
-        nodes.splice(i, 1);
+   
        
-        return true; // stop searching
+        checker =true; // stop searching
     }
-    return false;
+    checker =false;
 });
 
-
+return checker
   
 }
 
