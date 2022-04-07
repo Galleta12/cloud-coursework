@@ -261,14 +261,14 @@ function this_leader(){
 
 function check_nodes(current){
   
-  // var dss = new Date();
-  // var current_node_time = current.time[1];
-  // var date1 = moment(current_node_time);
-  // var date2 = moment(dss);
-  // var diff = date2.diff(date1,'minutes');
+  var dss = new Date();
+  var current_node_time = current.time[1];
+  var date1 = moment(current_node_time);
+  var date2 = moment(dss);
+  var diff = date2.diff(date1,'minutes');
 
 
   console.log("this is the time of the node that may be dead", current);
-  //console.log("Plaese work time", diff);
+  console.log("Plaese work time", diff);
   
 }
