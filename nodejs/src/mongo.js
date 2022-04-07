@@ -93,7 +93,7 @@ var d = new Date();
 var text = d.getFullYear() + ":"+ d.getDate() + ":" + d.getHours()+":" + d.getMinutes();
 
 
-toSend = {"hostname": myhostname, "time": [text,d], "nodeID": nodeID};
+toSend = {"hostname": myhostname, "time": text, "nodeID": nodeID};
 
 
 
@@ -173,14 +173,14 @@ function save_list(n){
 
   
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-    (nodes.find(e => e.nodeID === n["nodeID"])).time = [texts,d];
+    (nodes.find(e => e.nodeID === n["nodeID"])).time = texts;
  
    }
      else  {
       
+      if(check_duplicate() == false){
       nodes.push(n);
-      
-      
+      }
         
      
     }
@@ -189,6 +189,21 @@ function save_list(n){
    console.log("this are the nodes :", nodes);
 
 
+}
+
+
+function check_duplicate(n){
+ nodes.find((o, i) => {
+    if (o.hostname === n["hostname"] ) {
+        nodes.splice(i, 1);
+       
+        return true; // stop searching
+    }
+    return false;
+});
+
+
+  
 }
 
 
@@ -241,14 +256,14 @@ function this_leader(){
 
 function check_nodes(current){
   
-  var dss = new Date();
-  var current_node_time = current.time[1];
-  var date1 = moment(current_node_time);
-  var date2 = moment(dss);
-  var diff = date2.diff(date1,'minutes');
+  // var dss = new Date();
+  // var current_node_time = current.time[1];
+  // var date1 = moment(current_node_time);
+  // var date2 = moment(dss);
+  // var diff = date2.diff(date1,'minutes');
 
 
-  console.log("this is the time of the node that may be dead", current_node_time);
-  console.log("Plaese work time", diff);
+  console.log("this is the time of the node that may be dead", current);
+  //console.log("Plaese work time", diff);
   
 }
