@@ -179,7 +179,10 @@ function save_list(n){
      else  {
       
       if(!nodes.includes(n["hostname"]) ){
-      nodes.push(n);
+      
+      if(check_duplicate(n) == false){
+        nodes.push(n);
+      }
       }
         
      
