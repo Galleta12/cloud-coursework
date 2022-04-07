@@ -195,15 +195,12 @@ function save_list(n){
 function check_duplicate(n){
   console.log("this remove duplicate");
   var checker = false;
-  nodes.find((o, i) => {
-    console.log("this remove duplicate");
-    if (o.hostname === n["hostname"] ) {
-   
-       
-        checker =true; // stop searching
+  for (var i=0; i < nodes.length; i++) {
+    if (nodes[i].hostname === n.hostname) {
+        checker = true;
     }
-    checker =false;
-});
+    checker = false;
+}
 
 return checker
   
