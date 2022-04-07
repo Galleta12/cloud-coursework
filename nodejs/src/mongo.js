@@ -178,7 +178,7 @@ function save_list(n){
    }
      else  {
       
-      if(check_duplicate() == false){
+      if(!nodes.includes(n["hostname"]) ){
       nodes.push(n);
       }
         
@@ -198,7 +198,7 @@ function check_duplicate(n){
   
   if(typeof nodes !== 'undefined'){
   for (var i=0; i < nodes.length; i++) {
-    if (nodes[i].hostname === n.hostname) {
+    if (nodes[i].hostname === n["hostname"]) {
         checker = true;
     }
     checker = false;
