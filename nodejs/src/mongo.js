@@ -19,6 +19,7 @@ const app = express()
 const port = 3000
 
 var os = require("os");
+const { resolve } = require('path');
 var myhostname = os.hostname();
 
 //connection string listing the mongo servers. This is an alternative to using a load balancer. THIS SHOULD BE DISCUSSED IN YOUR ASSIGNMENT.
@@ -99,6 +100,8 @@ toSend = {"hostname": myhostname, "time": [text,d], "nodeID": nodeID};
 
 
 
+
+
 setInterval(function() {
 
 var amqp = require('amqplib/callback_api');
@@ -156,7 +159,11 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
-                                    save_list(JSON.parse(m));
+                                    
+                                    save_list(new Promise(resolve =>{
+                                      resolve(JSON.parse(m));   
+                                    }
+                                      ));
                                 }, {
                                                 noAck: true
                                             });
@@ -165,10 +172,18 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
 
 }
 
-setTimeout(function(){a()},5000 );
 
-function save_list(n){
+// function publisher(){
+//   return new Promise(resolve => {
+    
+//   });
+// }
 
+
+setTimeout(function(){a()},5000);
+
+async function save_list(nn){
+  var n = await nn;
   var ds = new Date();
   var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
 
