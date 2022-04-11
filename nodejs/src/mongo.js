@@ -213,6 +213,7 @@ async function save_list(nn){
    
 
    console.log("this are the nodes :", nodes);
+   console.log("this are the nodes :", nodes_set);
 
 
 }
