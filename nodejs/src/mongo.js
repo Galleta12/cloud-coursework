@@ -218,14 +218,14 @@ function check_duplicates(n){
     if(typeof nodes !== 'undefined'){
     for (var i=0; i < nodes.length; i++) {
       if (nodes[i].hostname === n["hostname"]) {
-          checker = true;
+          resolve(true);
       }
-      checker = false;
+      resolve(false);
   }
     }else{
-      checker = false;
+      resolve(false);
     }
-    resolve(checker);
+   
 });
 }
 
