@@ -2,6 +2,8 @@
 //Object data modelling library for mongo
 const mongoose = require('mongoose');
 var moment = require('moment');
+var request = require('request');
+var url = '192.168.56.40:40000';
 
 //Mongo db client library
 //const MongoClient  = require('mongodb');
@@ -328,12 +330,40 @@ function check_alive(current_node_time){
 
 function set_not_alive(current_node_time, current){
   var date1 = moment(current_node_time);
+  var time_alive = 0;
+  var container_dead = {}
   nodes.forEach((i) =>{
     var date2 = moment(i.time);
     var diff = date1.diff(date2,'minutes');
     console.log("element", i.nodeID, "this is the different", diff, "this are the compared", current, ":", i);
-
+    time_alive = diff;
+    container_dead = i;
   })
+ if(time_alive >=2){
+   get_container_info(container_dead);
+ }
+
+}
+
+function get_container_info(container_dead){
+  
+  
+  console.log("this container is dead", container_dead)
+  request.get({
+    //we are using the /info url to get the base docker information
+      url: url + "/info",
+  }, (err, res, data) => {
+      if (err) {
+          console.log('Error:', err);
+      } else if (res.statusCode !== 200) {
+        console.log('Status:', res.statusCode);
+      } else{
+        //we need to parse the json response to access
+          data = JSON.parse(data)
+          console.log("Number of Containers = " + data.Containers);
+      }
+  });
+
 
 
 }
