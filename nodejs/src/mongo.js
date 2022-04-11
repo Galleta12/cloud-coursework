@@ -188,18 +188,19 @@ setTimeout(function(){a()},5000);
 async function save_list(nn){
   var n = await nn;
   nodes_set.add(n.nodeID);
-  if(nodes_set.has(n.nodeID) == true){
-    var ds = new Date();
-    var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
   
-    
+  var ds = new Date();
+  var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
+
+  if(nodes.length > 3){
     if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
    
      }
   }
-  else if(nodes_set.has(n.nodeID) == false){
-    if(!nodes.includes(n["hostname"]) ){
+     else  {
+      
+      if(!nodes.includes(n["hostname"]) ){
       if(!nodes.includes(n["nodeID"])){
       
       if(check_duplicate(n) == false){
@@ -207,9 +208,8 @@ async function save_list(nn){
       }
       }
     }
-  }
-
- 
+     
+    }
    
 
    console.log("this are the nodes :", nodes);
