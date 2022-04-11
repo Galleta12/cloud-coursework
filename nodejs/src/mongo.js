@@ -161,14 +161,14 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
                                    
-                                    if(nodes.length > 3 ){
+                                   
                                       save_list(new Promise(resolve =>{
                                         console.log("loading nodes")
                                         resolve(JSON.parse(m));   
                                       }
   
                                         ));
-                                    }
+                                   
                                    
                                 }, {
                                                 noAck: true
@@ -205,7 +205,7 @@ async function save_list(nn){
      }
    
  
-     else{
+     else if(nodes.length < 3){
       
       if(!nodes.includes(n["hostname"]) ){
       if(!nodes.includes(n["nodeID"])){
