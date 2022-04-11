@@ -160,7 +160,7 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
-                                    nodes_set.add(toSend["hostname"]);
+                                    
                                   
                                     save_list(new Promise(resolve =>{
                                       console.log("loading nodes")
@@ -192,6 +192,7 @@ async function save_list(nn){
   
   var ds = new Date();
   var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
+  nodes_set.add(n["hostname"]);
   var duplicte_set = nodes_set.has(n["hostname"]);
   
     if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
