@@ -290,8 +290,8 @@ function check_nodes(current){
   //var diff = date2.diff(date1,'minutes');
   //var test_alive = await check_alive(current_node_time)
   
-  
-  console.log("this is the time of the node that may be dead", test_alive);
+  set_not_alive();
+  console.log("this is the time of the node that may be dead", current_node_time);
   console.log("Plaese work time");
   
 }
