@@ -32,6 +32,7 @@ setInterval(function() {
 }, 3000);
 
 let nodes= [];
+let nodes_set = new Set();
 
 systemLeader = false;
 //tell express to use the body parser. Note - This function was built into express but then moved to a seperate package.
@@ -159,11 +160,12 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
-                                    
+                                  
                                     save_list(new Promise(resolve =>{
                                       console.log("loading nodes")
                                       resolve(JSON.parse(m));   
                                     }
+
                                       ));
                                 }, {
                                                 noAck: true
@@ -185,17 +187,19 @@ setTimeout(function(){a()},5000);
 
 async function save_list(nn){
   var n = await nn;
-  var ds = new Date();
-  var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
-
+  nodes_set.add(n.nodeID);
+  if(nodes_set.has(n.nodeID) == true){
+    var ds = new Date();
+    var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
   
-  if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-    (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
- 
-   }
-     else  {
-      
-      if(!nodes.includes(n["hostname"]) ){
+    
+    if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
+      (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
+   
+     }
+  }
+  else if(nodes_set.has(n.nodeID) == false){
+    if(!nodes.includes(n["hostname"]) ){
       if(!nodes.includes(n["nodeID"])){
       
       if(check_duplicate(n) == false){
@@ -203,8 +207,9 @@ async function save_list(nn){
       }
       }
     }
-     
-    }
+  }
+
+ 
    
 
    console.log("this are the nodes :", nodes);
