@@ -20,7 +20,6 @@ const port = 3000
 
 var os = require("os");
 const { resolve } = require('path');
-const { rejects } = require('assert');
 var myhostname = os.hostname();
 
 //connection string listing the mongo servers. This is an alternative to using a load balancer. THIS SHOULD BE DISCUSSED IN YOUR ASSIGNMENT.
@@ -187,12 +186,9 @@ async function save_list(nn){
   var n = await nn;
   var ds = new Date();
   var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
+
   
-  var loop_nodes = new Promise((resolve,rejects) => {
-    resolve(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"]))
-  })
-  var loop_nodes_await =  await loop_nodes;
-  if(loop_nodes_await == true){
+  if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
     (nodes.find(e => e.nodeID === n["nodeID"])).time = [texts,ds];
  
    }
