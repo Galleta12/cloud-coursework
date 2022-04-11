@@ -195,7 +195,8 @@ async function save_list(nn){
      else  {
       
       if(!nodes.includes(n["hostname"]) ){
-      var cheker_please= await check_duplicates(n)
+      var cheker_please=  check_duplicates(n)
+      await cheker_please;
       if(cheker_please == false){
         nodes.push(n);
       }
