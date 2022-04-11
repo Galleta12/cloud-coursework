@@ -195,13 +195,13 @@ async function save_list(nn){
      else  {
       
       if(!nodes.includes(n["hostname"]) ){
-      var cheker_please=  check_duplicates(n)
-      await cheker_please;
-      if(cheker_please == false){
+      if(!nodes.includes(n["nodeID"])){
+      
+      if(check_duplicate(n) == false){
         nodes.push(n);
       }
       }
-        
+    }
      
     }
    
@@ -210,24 +210,8 @@ async function save_list(nn){
 
 
 }
-function check_duplicates(n){ 
-  console.log("this remove duplicate");
-  return new Promise(resolve =>{
-    var checker = false;
-  
-    if(typeof nodes !== 'undefined'){
-    for (var i=0; i < nodes.length; i++) {
-      if (nodes[i].hostname === n["hostname"]) {
-          resolve(true);
-      }
-      resolve(false);
-  }
-    }else{
-      resolve(false);
-    }
-   
-});
-}
+
+// }
 
 function check_duplicate(n){
   console.log("this remove duplicate");
