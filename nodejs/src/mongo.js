@@ -281,14 +281,15 @@ function this_leader(){
   }
 }
 
-async function check_nodes(current){
+function check_nodes(current){
   
   //var dss = new Date();
   var current_node_time = current.time;
   //var date1 = moment(current_node_time);
   //var date2 = moment(dss);
   //var diff = date2.diff(date1,'minutes');
-  var test_alive = await check_alive(current_node_time)
+  //var test_alive = await check_alive(current_node_time)
+  
   
   console.log("this is the time of the node that may be dead", test_alive);
   console.log("Plaese work time");
@@ -296,9 +297,7 @@ async function check_nodes(current){
 }
 
 function check_alive(current_node_time){
-  var date1 = moment(current_node_time);
-
-  
+  var date1 = moment(current_node_time);  
   console.log("I hope this is looping");
   return new Promise((resolve,reject) =>{
     nodes.forEach((i) =>{
@@ -311,6 +310,17 @@ function check_alive(current_node_time){
       }
     })
   });
+
+}
+
+function set_not_alive(current_node_time){
+  var date1 = moment(current_node_time);
+  nodes.forEach((i) =>{
+    var date2 = moment(i.time);
+    var diff = date1.diff(date2,'minutes');
+    console.log("element", i.nodeID, "this is the different", diff, "this are the compared", date1, ":", date2);
+
+  })
 
 
 }
