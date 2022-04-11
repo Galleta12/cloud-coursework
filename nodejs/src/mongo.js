@@ -275,7 +275,7 @@ function this_leader(){
   
     console.log("U are on the current leader", toSend);
     current_leader = leadership();
-    //check_nodes(current_leader);
+    check_nodes(current_leader);
 
 
   }
@@ -284,7 +284,7 @@ function this_leader(){
 async function check_nodes(current){
   
   //var dss = new Date();
-  var current_node_time = current.time[1];
+  var current_node_time = current.time;
   //var date1 = moment(current_node_time);
   //var date2 = moment(dss);
   //var diff = date2.diff(date1,'minutes');
@@ -302,7 +302,7 @@ function check_alive(current_node_time){
   console.log("I hope this is looping");
   return new Promise((resolve,reject) =>{
     nodes.forEach((i) =>{
-      var date2 = moment(i.time[1]);
+      var date2 = moment(i.time);
       var diff = date1.diff(date2,'minutes');
       if(diff == 2){
         resolve(i);
