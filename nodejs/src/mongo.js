@@ -318,7 +318,7 @@ function set_not_alive(current_node_time){
   nodes.forEach((i) =>{
     var date2 = moment(i.time);
     var diff = date1.diff(date2,'minutes');
-    console.log("element", i.nodeID, "this is the different", diff, "this are the compared", date1, ":", date2);
+    console.log("element", i.nodeID, "this is the different", diff, "this are the compared", current_node_time, ":", i);
 
   })
 
