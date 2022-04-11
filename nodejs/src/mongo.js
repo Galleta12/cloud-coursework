@@ -160,14 +160,14 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
-                                    
-                                  
+                                    var please = nodes_set.has(msg.content.hostname);
+                                     
                                     save_list(new Promise(resolve =>{
                                       console.log("loading nodes")
                                       resolve(JSON.parse(m));   
                                     }
 
-                                      ));
+                                      ),please);
                                 }, {
                                                 noAck: true
                                             });
@@ -186,21 +186,24 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
 
 setTimeout(function(){a()},5000);
 
-async function save_list(nn){
+async function save_list(nn,please){
   var n = await nn;
   
   
   var ds = new Date();
   var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
   nodes_set.add(n["hostname"]);
-  var duplicte_set = nodes_set.has(toSend["hostname"]);
+  if(please == true){
+
+  
   
     if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
    
      }
+    }
  
-     else if(duplicte_set == false)  {
+     else  {
       
       if(!nodes.includes(n["hostname"]) ){
       if(!nodes.includes(n["nodeID"])){
