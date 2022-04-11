@@ -161,7 +161,7 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                                     var m = msg.content.toString();
                                     
                                     save_list(new Promise(resolve =>{
-                                      console.log("cargando productos")
+                                      console.log("loading nodes")
                                       resolve(JSON.parse(m));   
                                     }
                                       ));
@@ -281,16 +281,34 @@ function this_leader(){
   }
 }
 
-function check_nodes(current){
+async function check_nodes(current){
   
-  var dss = new Date();
+  //var dss = new Date();
   var current_node_time = current.time[1];
-  var date1 = moment(current_node_time);
-  var date2 = moment(dss);
-  var diff = date2.diff(date1,'minutes');
-
-
-  console.log("this is the time of the node that may be dead", current);
-  console.log("Plaese work time", diff);
+  //var date1 = moment(current_node_time);
+  //var date2 = moment(dss);
+  //var diff = date2.diff(date1,'minutes');
+  var test_alive = await check_alive(current_node_time)
   
+  console.log("this is the time of the node that may be dead", test_alive);
+  console.log("Plaese work time");
+  
+}
+
+function check_alive(current_node_time){
+  var date1 = moment(current_node_time);
+
+  
+  console.log("I hope this is looping");
+  return new Promise(resolve,reject =>{
+    nodes.forEach(i =>{
+      var date2 = moment(i.time[1]);
+      var diff = date1.diff(date2,'minutes');
+      if(diff == 2){
+        resolve(i);
+      }
+    })
+  });
+
+
 }
