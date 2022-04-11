@@ -210,12 +210,25 @@ async function save_list(nn){
 
 }
 function check_duplicates(n){ 
+  console.log("this remove duplicate");
   return new Promise(resolve =>{
-  resolve(check_duplicate(n));
+    var checker = false;
+  
+    if(typeof nodes !== 'undefined'){
+    for (var i=0; i < nodes.length; i++) {
+      if (nodes[i].hostname === n["hostname"]) {
+          checker = true;
+      }
+      checker = false;
+  }
+    }else{
+      checker = false;
+    }
+    resolve(checker);
 });
 }
 
-async function check_duplicate(n){
+function check_duplicate(n){
   console.log("this remove duplicate");
   var checker = false;
   
