@@ -295,7 +295,7 @@ function check_nodes(current){
   //var diff = date2.diff(date1,'minutes');
   //var test_alive = await check_alive(current_node_time)
   
-  set_not_alive();
+  set_not_alive(current_node_time, current);
   console.log("this is the time of the node that may be dead", current_node_time);
   console.log("Plaese work time");
   
@@ -318,12 +318,12 @@ function check_alive(current_node_time){
 
 }
 
-function set_not_alive(current_node_time){
+function set_not_alive(current_node_time, current){
   var date1 = moment(current_node_time);
   nodes.forEach((i) =>{
     var date2 = moment(i.time);
     var diff = date1.diff(date2,'minutes');
-    console.log("element", i.nodeID, "this is the different", diff, "this are the compared", current_node_time, ":", i);
+    console.log("element", i.nodeID, "this is the different", diff, "this are the compared", current, ":", i);
 
   })
 
