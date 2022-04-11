@@ -95,7 +95,7 @@ var d = new Date();
 var text = d.getFullYear() + ":"+ d.getDate() + ":" + d.getHours()+":" + d.getMinutes();
 
 
-toSend = {"hostname": myhostname, "time": [text,d], "nodeID": nodeID};
+toSend = {"hostname": myhostname, "time": d, "nodeID": nodeID};
 
 
 
@@ -190,7 +190,7 @@ async function save_list(nn){
 
   
   if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-    (nodes.find(e => e.nodeID === n["nodeID"])).time = [texts,ds];
+    (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
  
    }
      else  {
@@ -275,7 +275,7 @@ function this_leader(){
   
     console.log("U are on the current leader", toSend);
     current_leader = leadership();
-    check_nodes(current_leader);
+    //check_nodes(current_leader);
 
 
   }
