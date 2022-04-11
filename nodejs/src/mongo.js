@@ -281,7 +281,7 @@ function this_leader(){
   }
 }
 
-function check_nodes(current){
+async function check_nodes(current){
   
   //var dss = new Date();
   var current_node_time = current.time[1];
