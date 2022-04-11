@@ -301,7 +301,7 @@ function check_alive(current_node_time){
   
   console.log("I hope this is looping");
   return new Promise((resolve,reject) =>{
-    nodes.forEach(i =>{
+    nodes.forEach((i) =>{
       var date2 = moment(i.time[1]);
       var diff = date1.diff(date2,'minutes');
       if(diff == 2){
