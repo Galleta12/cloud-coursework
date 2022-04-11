@@ -161,6 +161,7 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                                     var m = msg.content.toString();
                                     
                                     save_list(new Promise(resolve =>{
+                                      console.log("cargando productos")
                                       resolve(JSON.parse(m));   
                                     }
                                       ));
