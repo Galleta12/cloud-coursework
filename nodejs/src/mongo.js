@@ -196,7 +196,7 @@ async function save_list(nn){
       
       if(!nodes.includes(n["hostname"]) ){
       
-      if(check_duplicate(n) == false){
+      if(await check_duplicates(n) == false){
         nodes.push(n);
       }
       }
@@ -209,7 +209,11 @@ async function save_list(nn){
 
 
 }
-
+function check_duplicates(n){ 
+  return new Promise(resolve =>{
+  resolve(check_duplicate(n));
+});
+}
 
 function check_duplicate(n){
   console.log("this remove duplicate");
