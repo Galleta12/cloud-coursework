@@ -306,6 +306,8 @@ function check_alive(current_node_time){
       var diff = date1.diff(date2,'minutes');
       if(diff == 2){
         resolve(i);
+      }else{
+        reject("error")
       }
     })
   });
