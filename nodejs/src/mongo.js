@@ -215,7 +215,7 @@ function check_duplicates(n){
 });
 }
 
-function check_duplicate(n){
+async function check_duplicate(n){
   console.log("this remove duplicate");
   var checker = false;
   
