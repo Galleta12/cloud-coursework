@@ -193,7 +193,7 @@ async function save_list(nn){
   var ds = new Date();
   var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
   nodes_set.add(n["hostname"]);
-  var duplicte_set = nodes_set.has(n["hostname"]);
+  var duplicte_set = nodes_set.has(toSend["hostname"]);
   
     if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
