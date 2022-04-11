@@ -186,9 +186,10 @@ async function save_list(nn){
   var n = await nn;
   var ds = new Date();
   var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
-
   
-  if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
+  var loop_nodes = new Promise.resolve(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"]))
+  var loop_nodes_await =  await loop_nodes;
+  if(loop_nodes_await == true){
     (nodes.find(e => e.nodeID === n["nodeID"])).time = [texts,ds];
  
    }
@@ -196,7 +197,7 @@ async function save_list(nn){
       
       if(!nodes.includes(n["hostname"]) ){
       
-      if(await check_duplicates(n) == false){
+      if(check_duplicate(n) == false){
         nodes.push(n);
       }
       }
@@ -209,11 +210,11 @@ async function save_list(nn){
 
 
 }
-function check_duplicates(n){ 
-  return new Promise(resolve =>{
-  resolve(check_duplicate(n));
-});
-}
+// function check_duplicates(n){ 
+//   return new Promise(resolve =>{
+//   resolve(check_duplicate(n));
+// });
+// }
 
 function check_duplicate(n){
   console.log("this remove duplicate");
