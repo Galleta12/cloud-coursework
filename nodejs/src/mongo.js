@@ -379,13 +379,14 @@ async function restartContainer(container_id){
       let res = await axios.get(`${url}/containers/${container_id}/json`);
       //await axios.post(`http://host.docker.internal:2375/containers/${containerName}/start`);
       var current_status= res.data.State.Running
-      console.log(current_status);
+      if(current_status == false){
+        console.log("This node is dead", current_status);
+        await axios.post(`${url}/containers/${container_id}/restart`).then(function(response){console.log(response)});
+      }
     }
     catch(error)
     {
         console.log(error);
     }
-
-    
-      
+       
 }
