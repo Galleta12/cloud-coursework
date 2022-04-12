@@ -201,6 +201,7 @@ async function save_list(nn){
   
   
     if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
+      console.log("this node should be updated", ds );
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
    
      }
