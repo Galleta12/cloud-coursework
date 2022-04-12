@@ -211,7 +211,7 @@ async function save_list(nn){
       console.log("this node should be updated", ds );
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
 
-      createContainer(n["nodeID"]);
+      createContainer(n["hostname"]);
     
      }
    
