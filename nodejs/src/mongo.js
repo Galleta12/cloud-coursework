@@ -335,12 +335,19 @@ function set_not_alive(current_node_time, current){
   nodes.forEach((i) =>{
     var date2 = moment(i.time);
     var diff = date1.diff(date2,'minutes');
-    console.log("element", i.nodeID, "this is the different", diff, "this are the compared", current, ":", i);
+    console.log("element", i.nodeID, "this is the different", diff, "this are the compared");
     time_alive = diff;
     container_dead = i;
+    if(diff >=2){
+      i.status = "dead";
+    }
   })
  if(time_alive >=2){
    get_container_info(container_dead);
+ }
+ else if(nodes.some( i => i.status === "dead")){
+  console.log("is dead");
+  get_container_info(container_dead);
  }
 
 }
@@ -352,6 +359,7 @@ function get_container_info(container_dead){
 
   var containers = Docker.getContainer(container_dead["hostname"]);
   containers.inspect(function (err, data) {
+    console.log("please work");
     console.log(data);
   });
 
