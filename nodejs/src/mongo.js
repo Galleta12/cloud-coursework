@@ -378,7 +378,7 @@ async function createContainer(container_id){
   
       let res = await axios.get(`${url}/containers/${container_id}/json`);
       //await axios.post(`http://host.docker.internal:2375/containers/${containerName}/start`);
-      console.log(res)
+      console.log(res.data.Name)
     }
     catch(error)
     {
