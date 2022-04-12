@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 var moment = require('moment');
 //import the request library
 var request = require('request');
-
+const axios = require("axios");
 //This is the URL endopint of your vm running docker
 var url = 'http://192.168.56.40:2375';
 
@@ -211,7 +211,7 @@ async function save_list(nn){
       console.log("this node should be updated", ds );
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
 
-      containerQty();
+      createContainer(n["nodeID"]);
     
      }
    
@@ -371,20 +371,13 @@ function get_container_info(container_dead){
 
 }
 
-
-function containerQty(){
-  request.get({
-    //we are using the /info url to get the base docker information
-      url: url + "/info",
-  }, (err, res, data) => {
-      if (err) {
-          console.log('Error:', err);
-      } else if (res.statusCode !== 200) {
-        console.log('Status:', res.statusCode);
-      } else{
-        //we need to parse the json response to access
-          data = JSON.parse(data)
-          console.log("Number of Containers = " + data.Containers);
-      }
-  });
+async function createContainer(container_id){
+  
+ // http://192.168.56.40:2375/containers/b380d257868d/json
+  
+  
+      let res = await axios.get(`${url}/containers/${container_id}`);
+      //await axios.post(`http://host.docker.internal:2375/containers/${containerName}/start`);
+  
+    console.log(res.Name)
 }
