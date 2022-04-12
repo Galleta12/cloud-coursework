@@ -374,10 +374,17 @@ function get_container_info(container_dead){
 async function createContainer(container_id){
   
  // http://192.168.56.40:2375/containers/b380d257868d/json
+    try{
   
-  
-      let res = await axios.get(`${url}/containers/${container_id}`);
+      let res = await axios.get(`${url}/containers/${container_id}/json`);
       //await axios.post(`http://host.docker.internal:2375/containers/${containerName}/start`);
-  
-    console.log(res.Name)
+      console.log(res.Name)
+    }
+    catch(error)
+    {
+        console.log(error);
+    }
+
+    
+      
 }
