@@ -350,8 +350,8 @@ function get_container_info(container_dead){
   
   console.log("this container is dead", container_dead)
 
-  var container = docker.getContainer(container_dead["hostname"]);
-  container.inspect(function (err, data) {
+  var containers = Docker.getContainer(container_dead["hostname"]);
+  containers.inspect(function (err, data) {
     console.log(data);
   });
 
