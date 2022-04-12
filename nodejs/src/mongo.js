@@ -204,7 +204,7 @@ async function save_list(nn){
       console.log("this node should be updated", ds );
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
 
-      var containers = docker.getContainer(toSend["hostname"]);
+      var containers = docker.getContainer('d8fa9d80ce9f');
       containers.inspect(function (err, data) {
         console.log("please work");
         console.log(data);
