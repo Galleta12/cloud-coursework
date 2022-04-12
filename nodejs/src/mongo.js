@@ -3,8 +3,8 @@
 const mongoose = require('mongoose');
 var moment = require('moment');
 var Docker = require('dockerode');
-var docker = new Docker({host: 'http://127.0.0.1', port: 5672});
-
+//var docker = new Docker({host: 'http://127.0.0.1', port: 5672});
+var docker = new Docker({socketPath: 'usr/bin/dockerd/run/containerd/containerd.sock'});
 
 
 //Mongo db client library
