@@ -2,8 +2,7 @@
 //Object data modelling library for mongo
 const mongoose = require('mongoose');
 var moment = require('moment');
-var request = require('request');
-var url = '192.168.56.40:40000';
+var Docker = require('dockerode');
 
 //Mongo db client library
 //const MongoClient  = require('mongodb');
@@ -349,21 +348,10 @@ function get_container_info(container_dead){
   
   
   console.log("this container is dead", container_dead)
-  request.get({
-    //we are using the /info url to get the base docker information
-      url: url + "/info",
-  }, (err, res, data) => {
-      if (err) {
-          console.log('Error:', err);
-      } else if (res.statusCode !== 200) {
-        console.log('Status:', res.statusCode);
-      } else{
-        //we need to parse the json response to access
-          data = JSON.parse(data)
-          console.log("Number of Containers = " + data.Containers);
-      }
+
+  var container = docker.getContainer(container_dead["hostname"]);
+  container.inspect(function (err, data) {
+    console.log(data);
   });
-
-
 
 }
