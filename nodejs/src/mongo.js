@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 var moment = require('moment');
 var Docker = require('dockerode');
-
+var docker = new Docker({socketPath: '/var/run/docker.sock'});
 //Mongo db client library
 //const MongoClient  = require('mongodb');
 
@@ -358,7 +358,7 @@ function get_container_info(container_dead){
   
   console.log("this container is dead", container_dead)
 
-  var containers = Docker.getContainer(container_dead["hostname"]);
+  var containers = docker.getContainer(container_dead["hostname"]);
   containers.inspect(function (err, data) {
     console.log("please work");
     console.log(data);
