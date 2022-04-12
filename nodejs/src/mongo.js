@@ -381,7 +381,7 @@ async function restartContainer(container_id){
       var current_status= res.data.State.Running
       if(current_status == false){
         console.log("This node is dead", current_status);
-        await axios.post(`${url}/containers/${container_id}/restart`).then(function(response){console.log(response)});
+        await axios.post(`${url}/containers/${container_id}/restart`).then(function(response){console.log(response.status)});
       }
     }
     catch(error)
@@ -390,3 +390,35 @@ async function restartContainer(container_id){
     }
        
 }
+
+
+const containerName = "containertest";
+
+const containerDetails = {
+      Image: "alpine",
+      Hostname: "nodejscluster_node1_4",
+      Cmd: ["echo", "hello world from LJMU cloud computing"],
+      NetworkingConfig: {
+        EndpointsConfig: {
+          "apitest_nodejs": {},
+        },
+      },
+    }
+
+async function createContainer(){
+      
+  console.log("If this work I almos have everything")
+  try{
+          await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response)});
+          
+      }
+      catch(error)
+      {
+          console.log(error);
+      }
+  }
+  
+
+setTimeout(async function(){createContainer()},20000);
+
+
