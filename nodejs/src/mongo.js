@@ -211,7 +211,7 @@ async function save_list(nn){
       console.log("this node should be updated", ds );
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
 
-      createContainer(n["hostname"]);
+      //createContainer(n["hostname"]);
     
      }
    
@@ -367,18 +367,19 @@ function get_container_info(container_dead){
   
   console.log("this container is dead", container_dead)
 
-
+  restartContainer(container_dead["hostname"]);
 
 }
 
-async function createContainer(container_id){
+async function restartContainer(container_id){
   
  // http://192.168.56.40:2375/containers/b380d257868d/json
     try{
   
       let res = await axios.get(`${url}/containers/${container_id}/json`);
       //await axios.post(`http://host.docker.internal:2375/containers/${containerName}/start`);
-      console.log(res.data.Name)
+      var current_status= res.data.State.Running
+      console.log(current_status);
     }
     catch(error)
     {
