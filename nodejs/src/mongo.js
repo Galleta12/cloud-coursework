@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 var moment = require('moment');
 var Docker = require('dockerode');
-var docker = new Docker({host: 'http://192.168.56.40:2375/info', port: 2375});
+var docker = new Docker({host: '127.0.0.1', port: 2375});
 
 
 
