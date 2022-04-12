@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 var moment = require('moment');
 var Docker = require('dockerode');
-var docker = new Docker({socketPath: '/var/run/docker.sock'});
+var docker = new Docker({host: 'http://192.168.56.40', port: 2375});
 
 
 
@@ -207,10 +207,10 @@ async function save_list(nn){
       console.log("this node should be updated", ds );
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
 
-      var containers = docker.getContainer('d8fa9d80ce9f');
-      containers.inspect(function (err, data) {
-        console.log("please work");
-        console.log(data);
+      docker.listContainers(function (err, containers) {
+        containers.forEach(function (containerInfo) {
+          console.log(docker.getContainer(containerInfo.Id));
+        });
       });
     console.log(docker);
    
