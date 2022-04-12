@@ -347,7 +347,8 @@ function set_not_alive(current_node_time, current){
  }
  else if(nodes.some( i => i.status === "dead")){
   console.log("is dead");
-  get_container_info(container_dead);
+  var this_dead = nodes.find(e => e.status === "dead");
+  get_container_info(this_dead);
  }
 
 }
