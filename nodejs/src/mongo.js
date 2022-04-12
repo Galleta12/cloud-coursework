@@ -2,8 +2,12 @@
 //Object data modelling library for mongo
 const mongoose = require('mongoose');
 var moment = require('moment');
-var Docker = require('dockerode');
-var docker = new Docker({host: 'http://192.168.56.40:2375/info', port: 2375});
+//import the request library
+var request = require('request');
+
+//This is the URL endopint of your vm running docker
+var url = 'http://192.168.56.40:2375';
+
 
 
 
@@ -207,13 +211,8 @@ async function save_list(nn){
       console.log("this node should be updated", ds );
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
 
-      docker.listContainers(function (err, containers) {
-        containers.forEach(function (containerInfo) {
-          console.log(docker.getContainer(containerInfo.Id));
-        });
-      });
-    console.log(docker);
-   
+      containerQty();
+    
      }
    
  
@@ -368,10 +367,24 @@ function get_container_info(container_dead){
   
   console.log("this container is dead", container_dead)
 
-  var containers = docker.getContainer(container_dead["hostname"]);
-  containers.inspect(function (err, data) {
-    console.log("please work");
-    console.log(data);
-  });
 
+
+}
+
+
+function containerQty(){
+  request.get({
+    //we are using the /info url to get the base docker information
+      url: url + "/info",
+  }, (err, res, data) => {
+      if (err) {
+          console.log('Error:', err);
+      } else if (res.statusCode !== 200) {
+        console.log('Status:', res.statusCode);
+      } else{
+        //we need to parse the json response to access
+          data = JSON.parse(data)
+          console.log("Number of Containers = " + data.Containers);
+      }
+  });
 }
