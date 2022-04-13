@@ -399,7 +399,7 @@ const containerDetails = {
   WORKDIR: "/usr/src/app",  
   Volumes: {"/container/path": {}},
   HostConfig: {
-    Binds : ["src/ ."],
+    Binds : ["node1:/src:/usr/src/app/"],
   },
   Cmd: ["echo", "hello world from LJMU cloud computing", "new_container.js"],
     };
