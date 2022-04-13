@@ -239,7 +239,7 @@ async function save_list(nn){
 // }
 
 function check_duplicate(n){
-  console.log("this remove duplicate");
+  console.log("this should check is something is duplicate");
   var checker = false;
   
   if(typeof nodes !== 'undefined'){
@@ -257,7 +257,7 @@ return checker
   
 }
 
-
+// get the highest id
 function leadership(){
 var max = nodes[0];
 for(var i = 0; i < nodes.length; i++ ){
@@ -271,7 +271,7 @@ return max;
 
 setInterval(function() {
 
-  console.log("what");
+  console.log("Get he lider");
   //console.log(toSend.nodeID);
   //console.log("this is the leader", leadership());
   console.log("this is the leader in the list of nodes", leadership());
@@ -315,27 +315,27 @@ function check_nodes(current){
   //var test_alive = await check_alive(current_node_time)
   
   set_not_alive(current_node_time, current);
-  console.log("this is the time of the node that may be dead", current_node_time);
+  //console.log("this is the time of the node that may be dead", current_node_time);
   console.log("Plaese work time");
   
 }
 
-function check_alive(current_node_time){
-  var date1 = moment(current_node_time);  
-  console.log("I hope this is looping");
-  return new Promise((resolve,reject) =>{
-    nodes.forEach((i) =>{
-      var date2 = moment(i.time);
-      var diff = date1.diff(date2,'minutes');
-      if(diff == 2){
-        resolve(i);
-      }else{
-        reject("error")
-      }
-    })
-  });
+// function check_alive(current_node_time){
+//   var date1 = moment(current_node_time);  
+//   console.log("I hope this is looping");
+//   return new Promise((resolve,reject) =>{
+//     nodes.forEach((i) =>{
+//       var date2 = moment(i.time);
+//       var diff = date1.diff(date2,'minutes');
+//       if(diff == 2){
+//         resolve(i);
+//       }else{
+//         reject("error")
+//       }
+//     })
+//   });
 
-}
+// }
 
 function set_not_alive(current_node_time, current){
   var date1 = moment(current_node_time);
