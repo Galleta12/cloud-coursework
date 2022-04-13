@@ -404,8 +404,8 @@ async function createContainer(){
   
   console.log("If this work I almost have everything")
   try{
-          let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err.data.status)});
-          console.log("Debuggin", res_check.status);  
+          let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err)});
+          console.log("Debuggin", res_check);  
           if (res_check.status != 200){
 
             
