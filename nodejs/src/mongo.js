@@ -397,8 +397,7 @@ const containerName = "containertest";
 const containerDetails = {
       Image: "alpine",
       Hostname: "nodejscluster_node1_4",
-      WorkingDir: "/usr/src/app",
-      Cmd: ["new_container.js"],
+      Cmd: ["echo", "hello world from LJMU cloud computing"],
       NetworkingConfig: {
         EndpointsConfig: {
           "apitest_nodejs": {},
