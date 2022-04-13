@@ -396,32 +396,28 @@ const containerName = "containertest";
 
 const containerDetails = {
       Image: "alpine",
-      Hostname: "nodejscluster_testing",
+      Hostname: "nodejscluster_node1_4",
       Cmd: ["echo", "hello world from LJMU cloud computing"],
-      ExposedPorts: {
-        "5000/tcp": {}
-      },
       NetworkingConfig: {
         EndpointsConfig: {
-          "apitest_nodejs_new": {},
+          "apitest_nodejs": {},
         },
       },
-
-    };
+    }
 
 async function createContainer(){
-      
+
   console.log("If this work I almos have everything")
   try{
           await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response)});
-          
+
       }
       catch(error)
       {
           console.log(error);
       }
   }
-  
+
 
 setTimeout(async function(){createContainer()},20000);
 
