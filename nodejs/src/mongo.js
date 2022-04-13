@@ -395,9 +395,9 @@ async function restartContainer(container_id){
 const containerName = "containertest";
 
 const containerDetails = {
-      Image: "alpine",
+      Image: "node1",
       Hostname: "nodejscluster_node1_4",
-      Cmd: ["echo", "hello world from LJMU cloud computing"],
+      Cmd: ["pm2-runtime", "new_container.js", "--watch" ],
       NetworkingConfig: {
         EndpointsConfig: {
           "apitest_nodejs": {},
