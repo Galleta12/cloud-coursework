@@ -392,34 +392,34 @@ async function restartContainer(container_id){
 }
 
 
-const containerName = "containertest";
+//const containerName = "containertest";
 
-const containerDetails = {
-      Image: "alpine",
-      Hostname: "nodejscluster_testing",
-      Cmd: ["echo", "hello world from LJMU cloud computing"],
-      NetworkingConfig: {
-        EndpointsConfig: {
-          "apitest_nodejs": {},
-        },
-      },
+// const containerDetails = {
+//       Image: "alpine",
+//       Hostname: "nodejscluster_testing",
+//       Cmd: ["echo", "hello world from LJMU cloud computing"],
+//       NetworkingConfig: {
+//         EndpointsConfig: {
+//           "apitest_nodejs": {},
+//         },
+//       },
 
-    };
+//     };
 
-async function createContainer(){
+// async function createContainer(){
       
-  console.log("If this work I almos have everything")
-  try{
-          await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response)});
+//   console.log("If this work I almos have everything")
+//   try{
+//           await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response)});
           
-      }
-      catch(error)
-      {
-          console.log(error);
-      }
-  }
+//       }
+//       catch(error)
+//       {
+//           console.log(error);
+//       }
+//   }
   
 
-setTimeout(async function(){createContainer()},20000);
+// setTimeout(async function(){createContainer()},20000);
 
 
