@@ -395,10 +395,9 @@ async function restartContainer(container_id){
 const containerName = "containertest";
 
 const containerDetails = {
-      Hostname: "nodejscluster_test",
-      Cmd: ["echo", "hello world from LJMU cloud computing"],
-      Image: "alpine",
-      NetworkDisabled : false,
+  Image: "alpine",    
+  Cmd: ["echo", "hello world from LJMU cloud computing"],
+    
   
     }
 
@@ -411,8 +410,8 @@ async function createContainer(){
             counter+= 1;
             console.log("counter second", counter);
             await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
-         
-          clearInterval(id_set_please)
+            await axios.post(`${url}/containers/${containerName}/start`);
+          clearInterval(id_set_please);
           console.log("Plesssssssssssssssssssss");
           }
       }
@@ -423,6 +422,6 @@ async function createContainer(){
   }
 
 
-var id_set_please = setTimeout(async function(){createContainer()},20000);
+var id_set_please = setTimeout(async function(){createContainer()},60000);
 
 
