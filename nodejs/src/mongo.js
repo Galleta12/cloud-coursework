@@ -395,7 +395,7 @@ async function restartContainer(container_id){
 const containerName = "containertest";
 
 const containerDetails = {
-      Hostname: "nodejscluster_node1_4",
+      Hostname: "nodejscluster_test",
       Cmd: ["echo", "hello world from LJMU cloud computing"],
       Image: "alpine",
       NetworkDisabled : false,
@@ -406,9 +406,12 @@ async function createContainer(){
   var counter = 1
   console.log("If this work I almost have everything")
   try{
-          if(counter = 1){   
-          await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
-          counter+= 1;
+          if(counter == 1){   
+            console.log("counter first", counter);
+            counter+= 1;
+            console.log("counter second", counter);
+            await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
+         
           clearInterval(id_set_please)
           console.log("Plesssssssssssssssssssss");
           }
