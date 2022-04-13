@@ -405,7 +405,8 @@ async function createContainer(){
   console.log("If this work I almost have everything")
   try{
           let res_check = await axios.get(`${url}/containers/${containerName}/json`);
-            if (res_check.status != 200){
+          console.log("Debuggin", res_check.data.status);  
+          if (res_check.status != 200){
 
             
             await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
