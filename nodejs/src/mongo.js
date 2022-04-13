@@ -406,7 +406,7 @@ async function createContainer(){
   try{
           let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err)});
           console.log("Debuggin", res_check);  
-          if (res_check.status == null){
+          if (res_check == null){
 
             
             await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
