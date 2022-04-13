@@ -397,7 +397,8 @@ const containerName = "containertest";
 const containerDetails = {
       Image: "alpine",
       Hostname: "nodejscluster_node1_4",
-      Cmd: ["pm2-runtime", "new_container.js", "--watch" ],
+      WorkingDir: "/usr/src/app",
+      Cmd: ["new_container.js"],
       NetworkingConfig: {
         EndpointsConfig: {
           "apitest_nodejs": {},
