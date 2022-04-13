@@ -402,15 +402,15 @@ const containerDetails = {
 
 async function createContainer(){
   
-  console.log("If this work I almost have everything")
+  console.log("It should create a container")
   try{
-          let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err)});
-          console.log("Debuggin", res_check);  
-          if (res_check == null){
+          // let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err)});
+          // console.log("Debuggin", res_check);  
+          //if (res_check == null){
 
             
             await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
-          }
+          //}
             await axios.post(`${url}/containers/${containerName}/start`).then(function(response){console.log("This is the status", response.data)});
             await axios.get(`${url}/containers/${containerName}/logs`).then(function(response){console.log("This is the status logs", response.data)});
            
