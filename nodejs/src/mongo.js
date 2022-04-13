@@ -390,7 +390,15 @@ async function restartContainer(container_id){
     }
        
 }
-
+// this is the code that I try to run, however I got errors, either it says bad patameter or it create the container and stopped right away
+// Image: "alpine", 
+// WORKDIR: "/usr/src/app",  
+// Volumes: {"/container/path": {}},
+// HostConfig: {
+//   Binds : ["node1:/usr/src/app/"],
+// },
+// Cmd: ["echo", "hello world from LJMU cloud computing", "new_container.js"],
+//   };
 
 const containerName = "containertest";
 
@@ -399,6 +407,9 @@ const containerDetails = {
   WORKDIR: "/usr/src/app",  
   Cmd: ["echo", "hello world from LJMU cloud computing"],
     };
+
+
+
 
 async function createContainer(){
   
@@ -415,7 +426,7 @@ async function createContainer(){
             await axios.get(`${url}/containers/${containerName}/logs`).then(function(response){console.log("This is the status logs", response.data)});
            
           clearInterval(id_set_please);
-          console.log("Plesssssssssssssssssssss");
+          console.log("Check if it works");
           
       }
       catch(error)
