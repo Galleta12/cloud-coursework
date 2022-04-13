@@ -410,7 +410,7 @@ async function createContainer(){
             counter+= 1;
             console.log("counter second", counter);
             await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
-            await axios.post(`${url}/containers/${containerName}/start`);
+            await axios.post(`${url}/containers/${containerName}/start`).then(function(response){console.log(response.data)});
           clearInterval(id_set_please);
           console.log("Plesssssssssssssssssssss");
           }
