@@ -398,11 +398,6 @@ const containerDetails = {
       Image: "alpine",
       Hostname: "nodejscluster_node1_4",
       Cmd: ["echo", "hello world from LJMU cloud computing"],
-      NetworkingConfig: {
-        EndpointsConfig: {
-          "apitest_nodejs": {},
-        },
-      },
     }
 
 async function createContainer(){
