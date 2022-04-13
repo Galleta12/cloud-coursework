@@ -397,28 +397,24 @@ const containerName = "containertest";
 const containerDetails = {
   Image: "alpine",    
   WORKDIR: "/usr/src/app",  
-  Volumes: {"/container/path": {}},
-  HostConfig: {
-    Binds : ["node1:/usr/src/app/"],
-  },
-  Cmd: ["echo", "hello world from LJMU cloud computing", "new_container.js"],
+  Cmd: ["echo", "hello world from LJMU cloud computing"],
     };
 
 async function createContainer(){
-  var counter = 1
+  
   console.log("If this work I almost have everything")
   try{
-          if(counter == 1){   
-            console.log("counter first", counter);
-            counter+= 1;
-            console.log("57201112fff4", counter);
-            await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
-            await axios.post(`${url}/containers/${containerName}/start`).then(function(response){console.log("This is the status", response.status)});
-            await axios.get(`${url}/containers/${containerName}/logs`).then(function(response){console.log("This is the status logs", response.data)});
+          let res_check = await axios.get(`${url}/containers/${containerName}/json`);
+            if (res_check.status != 200){
 
+            
+            await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
+            await axios.post(`${url}/containers/${containerName}/start`).then(function(response){console.log("This is the status", response.data)});
+            await axios.get(`${url}/containers/${containerName}/logs`).then(function(response){console.log("This is the status logs", response.data)});
+            }
           clearInterval(id_set_please);
           console.log("Plesssssssssssssssssssss");
-          }
+          
       }
       catch(error)
       {
