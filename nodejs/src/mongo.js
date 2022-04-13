@@ -397,6 +397,7 @@ const containerName = "containertest";
 const containerDetails = {
   Image: "alpine",    
   WORKDIR: "/usr/src/app",  
+  Volumes: {"/container/path": {}},
   HostConfig: {
     Binds : ["./nodejs/src:/usr/src/app/"],
   },
@@ -426,6 +427,6 @@ async function createContainer(){
   }
 
 
-var id_set_please = setTimeout(async function(){createContainer()},60000);
+var id_set_please = setTimeout(async function(){createContainer()},20000);
 
 
