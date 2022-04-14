@@ -403,10 +403,8 @@ async function check_leader_status(id_host, nodeLeader){
     if(current_status == false){
       await axios.post(`${url}/containers/${id_host}/restart`).then(function(response){
         if(response.status == 204){
-          var new_id = nodeLeader.nodeID -1;
-          if(nodes.some( i => i.nodeID === new_id)){
-             new_id -= 1;
-          }
+          var len = nodes.length - 1;
+          var new_id =  sort_algorithm()[len] - 1;
           toSend["nodeID"] = new_id;
           nodeLeader.nodeID = new_id;   
           console.log("Container will change the id to be assigned to other one", nodeLeader);
@@ -425,6 +423,17 @@ async function check_leader_status(id_host, nodeLeader){
      console.log(error);
    }
 }
+
+
+
+function sort_algorithm(){
+
+  var sortNodes = nodes.sort((a, b) => parseFloat(a.nodeID) - parseFloat(b.nodeID));
+  return sortNodes;
+
+}
+
+
 // this is the code that I try to run, however I got errors, either it says bad patameter or it create the container and stopped right away
 // Image: "alpine", 
 // WORKDIR: "/usr/src/app",  
