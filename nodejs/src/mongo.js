@@ -351,6 +351,9 @@ async function restartContainer(container_id, current_node_checking){
           if(response.status == 204){
             current_node_checking.status = "alive";
             console.log("Container restart", current_node_checking);
+            console.log("This node was restarted therefore we will need to delete the node from the array");
+            var removed = nodes.splice(nodes.findIndex(a => a.id === current_node_checking["nodeID"]), 1);
+            console.log("this node was remove:", removed);
           }
           console.log(response.status)});
       }else{
