@@ -33,7 +33,7 @@ var myhostname = os.hostname();
 //connection string listing the mongo servers. This is an alternative to using a load balancer. THIS SHOULD BE DISCUSSED IN YOUR ASSIGNMENT.
 const connectionString = 'mongodb://localmongo1:27017,localmongo2:27017,localmongo3:27017/NotFLIX?replicaSet=rs0';
 
-setInterval(function() {
+setTimeout(function() {
 
   console.log(`Intervals are used to fire a function for the lifetime of an application.`);
 
