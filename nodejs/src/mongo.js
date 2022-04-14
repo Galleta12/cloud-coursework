@@ -442,7 +442,7 @@ async function check_leader_status(id_host, nodeLeader){
 
 const wait_min = stop_min =>
     new Promise(resolve =>
-      setTimeout(() => resolve(stop_min), 600)
+      setTimeout(() => resolve(stop_min), 60)
       );
 
  async function min_algorithm(){
