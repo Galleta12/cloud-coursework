@@ -414,7 +414,7 @@ async function check_leader_status(id_host, nodeLeader){
     if(current_status == false){
       await axios.post(`${url}/containers/${id_host}/restart`).then(function(response){
         if(response.status == 204){
-          var new_id =  min_algorithm() - 1;
+          var new_id =  await min_algorithm();
           console.log("THis will be the new id", new_id);
           toSend["nodeID"] = new_id;
           nodeLeader.nodeID = new_id;
@@ -438,15 +438,16 @@ async function check_leader_status(id_host, nodeLeader){
 
 
 
-function min_algorithm(){
+async function min_algorithm(){
 
-  var min = nodes[0];
+var min = nodes[0];
 for(var i = 0; i < nodes.length; i++ ){
   if(min.nodeID > nodes[i].nodeID){
     min = nodes[i];
   }
 }
-return min; 
+
+return min -1;
 
 }
 
