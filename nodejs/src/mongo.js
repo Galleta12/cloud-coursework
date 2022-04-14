@@ -284,8 +284,26 @@ function this_leader(){
 function check_nodes(current){
   
   var current_node_time = current.time;
- 
-  set_not_alive(current_node_time, current);
+  var dss = new Date();
+  var current_date = moment(dss);
+  var date_of_leader = moment(current_node_time);
+  var diff_leader = current_date.diff(date_of_leader,'minutes');
+  if(Math.abs(diff_leader) >=2){
+    console.log("this time", dss, "is different from this time", current_node_time, "this is the difference", diff_leader);
+    console.log("This would mean that the leader is not receiving messages because a container is dead or the leader itself is dead");
+    var please =  check_leader_status(current["hostname"], current);
+    if (please == true){
+      console.log("The node leader is still alive, therefore the time will be updated");
+      current.time = dss;
+    }
+
+    
+
+  }else{
+    set_not_alive(current_node_time, current);
+  }
+  
+  
   
   //console.log("Plaese work time");
   
@@ -343,7 +361,7 @@ async function restartContainer(container_id, current_node_checking){
   
       let res = await axios.get(`${url}/containers/${container_id}/json`);
       //await axios.post(`http://host.docker.internal:2375/containers/${containerName}/start`);
-      var current_status= await res.data.State.Running
+      var current_status= await res.data.State.Running;
       console.log("THis is the current status if the node was found dead", current_status);
       if(current_status == false){
         console.log("This node is dead", current_status, "This node", current_node_checking );
@@ -373,6 +391,39 @@ async function restartContainer(container_id, current_node_checking){
         console.log(error);
     }
        
+}
+
+
+
+async function check_leader_status(id_host, nodeLeader){
+   try{
+    let res = await axios.get(`${url}/containers/${id_host}/json`);
+    var current_status= await res.data.State.Running;
+    console.log("THis is the current status of the leader that is not receiving messages", current_status);
+    if(current_status == false){
+      await axios.post(`${url}/containers/${id_host}/restart`).then(function(response){
+        if(response.status == 204){
+          var new_id = nodeLeader.nodeID -1;
+          if(nodes.some( i => i.nodeID === new_id)){
+             new_id -= 1;
+          }
+          toSend["nodeID"] = new_id;
+          nodeLeader.nodeID = new_id;   
+          console.log("Container will change the id to be assigned to other one", nodeLeader);
+          console.log("Like that other will be the leader");
+          
+        }
+        console.log(response.status)});
+        return false
+    }else
+    {
+      return true
+    }
+   }
+   catch(error)
+   {
+     console.log(error);
+   }
 }
 // this is the code that I try to run, however I got errors, either it says bad patameter or it create the container and stopped right away
 // Image: "alpine", 
