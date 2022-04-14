@@ -33,7 +33,7 @@ var myhostname = os.hostname();
 //connection string listing the mongo servers. This is an alternative to using a load balancer. THIS SHOULD BE DISCUSSED IN YOUR ASSIGNMENT.
 const connectionString = 'mongodb://localmongo1:27017,localmongo2:27017,localmongo3:27017/NotFLIX?replicaSet=rs0';
 
-setTimeout(function() {
+setInterval(function() {
 
   console.log(`Intervals are used to fire a function for the lifetime of an application.`);
 
@@ -111,7 +111,7 @@ toSend = {"hostname": myhostname, "time": d, "nodeID": nodeID};
 
 
 
-setTimeout(function() {
+setInterval(function() {
 
 var amqp = require('amqplib/callback_api');
 
@@ -251,9 +251,9 @@ return max;
 }
 
 
-setTimeout(function() {
+setInterval(function() {
 
-  console.log("Get the lider");
+  console.log("Get the lider whaattt");
   //console.log(toSend.nodeID);
   //console.log("this is the leader", leadership());
   console.log("this is the leader in the list of nodes", leadership());
