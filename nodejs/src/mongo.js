@@ -286,7 +286,7 @@ function this_leader(){
   }
 }
 
-function check_nodes(current){
+async function check_nodes(current){
   
   var current_node_time = current.time;
   var dss = new Date();
@@ -296,7 +296,7 @@ function check_nodes(current){
   if(Math.abs(diff_leader) >=2){
     console.log("this time", dss, "is different from this time", current_node_time, "this is the difference", diff_leader);
     console.log("This would mean that the leader is not receiving messages because a container is dead or the leader itself is dead");
-    var please =  check_leader_status(current["hostname"], current);
+    var please =  await check_leader_status(current["hostname"], current);
     if (please == true){
       console.log("The node leader is still alive, therefore the time will be updated");
       current.time = dss;
@@ -414,10 +414,11 @@ async function check_leader_status(id_host, nodeLeader){
     if(current_status == false){
       await axios.post(`${url}/containers/${id_host}/restart`).then(function(response){
         if(response.status == 204){
-          var len = nodes.length - 1;
-          var new_id =  sort_algorithm()[len] - 1;
+          var new_id =  sort_algorithm() - 1;
+          console.log("THis will be the new id", new_id);
           toSend["nodeID"] = new_id;
-          nodeLeader.nodeID = new_id;   
+          nodeLeader.nodeID = new_id;
+          nodeLeader.leader = false;   
           console.log("Container will change the id to be assigned to other one", nodeLeader);
           console.log("Like that other will be the leader");
           
@@ -439,8 +440,13 @@ async function check_leader_status(id_host, nodeLeader){
 
 function sort_algorithm(){
 
-  var sortNodes = nodes.sort((a, b) => parseInt(a.nodeID) - parseInt(b.nodeID));
-  return sortNodes;
+  var min = nodes[0];
+for(var i = 0; i < nodes.length; i++ ){
+  if(min.nodeID > nodes[i].nodeID){
+    min = nodes[i];
+  }
+}
+return min; 
 
 }
 
