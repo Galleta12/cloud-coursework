@@ -279,6 +279,11 @@ function this_leader(){
     // if it is the leader it will check the current nodes, to know if someone is not sending messages.
     check_nodes(current_leader);
   }
+  else{
+    var current_leader = leadership();
+    console.log("Ur ar not on the leader but anyways we should check if the leader has diead")
+    check_nodes(current_leader);
+  }
 }
 
 function check_nodes(current){
@@ -300,6 +305,7 @@ function check_nodes(current){
     
 
   }else{
+    console.log("The leader has never died therefore we can check the other nodes");
     set_not_alive(current_node_time, current);
   }
   
@@ -428,7 +434,7 @@ async function check_leader_status(id_host, nodeLeader){
 
 function sort_algorithm(){
 
-  var sortNodes = nodes.sort((a, b) => parseFloat(a.nodeID) - parseFloat(b.nodeID));
+  var sortNodes = nodes.sort((a, b) => parseInt(a.nodeID) - parseInt(b.nodeID));
   return sortNodes;
 
 }
