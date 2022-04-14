@@ -287,7 +287,7 @@ function check_nodes(current){
  
   set_not_alive(current_node_time, current);
   
-  console.log("Plaese work time");
+  //console.log("Plaese work time");
   
 }
 
@@ -309,20 +309,20 @@ function set_not_alive(current_node_time, current){
 //  if(time_alive >=2){
 //    get_container_info(container_dead);
 //  }
-//   if(nodes.some( i => i.status === "dead")){
-//   console.log("is dead");
-//   var this_dead = nodes.find(e => e.status === "dead");
-//   get_container_info(this_dead);
-//  }
+  if(nodes.some( i => i.status === "dead")){
+  console.log("is dead");
+  var this_dead = nodes.find(e => e.status === "dead");
+  get_container_info(this_dead);
+ }
 
-for(var i=0; i < nodes.length; i ++){
-  if(nodes[i].hasOwnProperty('status')){
-    if(nodes[i].status == "dead"){
-      get_container_info(nodes[i]);
-    }
-  }
+// for(var i=0; i < nodes.length; i ++){
+//   if(nodes[i].hasOwnProperty('status')){
+//     if(nodes[i].status == "dead"){
+//       get_container_info(nodes[i]);
+//     }
+//   }
 
-}
+// }
 
 }
 
@@ -346,7 +346,11 @@ async function restartContainer(container_id){
       var current_status= res.data.State.Running
       if(current_status == false){
         console.log("This node is dead", current_status);
-        await axios.post(`${url}/containers/${container_id}/restart`).then(function(response){console.log(response.status)});
+        await axios.post(`${url}/containers/${container_id}/restart`).then(function(response){
+          if(response.status == 204){
+            console.log("Container restart", response.status)
+          }
+          console.log(response.status)});
       }
     }
     catch(error)
