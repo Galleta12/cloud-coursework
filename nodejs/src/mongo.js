@@ -414,7 +414,7 @@ async function check_leader_status(id_host, nodeLeader){
     if(current_status == false){
       await axios.post(`${url}/containers/${id_host}/restart`).then(function(response){
         if(response.status == 204){
-          var new_id =  await min_algorithm();
+          var new_id =  min_algorithm();
           console.log("THis will be the new id", new_id);
           toSend["nodeID"] = new_id;
           nodeLeader.nodeID = new_id;
@@ -438,18 +438,25 @@ async function check_leader_status(id_host, nodeLeader){
 
 
 
-async function min_algorithm(){
 
-var min = nodes[0];
-for(var i = 0; i < nodes.length; i++ ){
-  if(min.nodeID > nodes[i].nodeID){
-    min = nodes[i];
-  }
-}
 
-return min -1;
+const wait_min = stop_min =>
+    new Promise(resolve =>
+      setTimeout(() => resolve(stop_min), 600)
+      );
 
-}
+ async function min_algorithm(){
+   var min = nodes[0];
+   for(var i = 0; i < nodes.length; i++ ){
+    const wait_value = await wait_min(nodes[i].nodeID); 
+    if(min.nodeID > wait_value){
+       min = nodes[i];
+     }
+   }
+   
+   return min -1;
+   
+   }
 
 
 // this is the code that I try to run, however I got errors, either it says bad patameter or it create the container and stopped right away
