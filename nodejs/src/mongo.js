@@ -101,7 +101,7 @@ app.listen(port, () => {
 var nodeID= Math.floor(Math.random() * (100 - 1 + 1) + 1);
 
 var d = new Date();
-var text = d.getFullYear() + ":"+ d.getDate() + ":" + d.getHours()+":" + d.getMinutes();
+//var text = d.getFullYear() + ":"+ d.getDate() + ":" + d.getHours()+":" + d.getMinutes();
 
 
 toSend = {"hostname": myhostname, "time": d, "nodeID": nodeID};
@@ -111,7 +111,7 @@ toSend = {"hostname": myhostname, "time": d, "nodeID": nodeID};
 
 
 
-setInterval(function() {
+setTimeout(function() {
 
 var amqp = require('amqplib/callback_api');
 
@@ -173,9 +173,7 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                                       save_list(new Promise(resolve =>{
                                         console.log("loading nodes")
                                         resolve(JSON.parse(m));   
-                                      }
-  
-                                        ));
+                                      }));
                                    
                                    
                                 }, {
@@ -187,13 +185,6 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
 }
 
 
-// function publisher(){
-//   return new Promise(resolve => {
-    
-//   });
-// }
-
-
 setTimeout(function(){a()},5000);
 
 async function save_list(nn){
@@ -201,21 +192,17 @@ async function save_list(nn){
   
   
   var ds = new Date();
-  var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
+  //var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
   nodes_set.add(n["hostname"]);
   
 
   
   
     if(nodes.some( i => i.nodeID === n["nodeID"]) && nodes.some( i => i.hostname === n["hostname"])){
-      console.log("this node should be updated", ds );
-      (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;
-
-      //createContainer(n["hostname"]);
-    
+      console.log("this node should be updated: ", n["nodeID"],"With this time: ",ds );
+      (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;    
      }
-   
- 
+  
      else if(nodes.length < 3){
       
       if(!nodes.includes(n["hostname"]) ){
@@ -228,15 +215,10 @@ async function save_list(nn){
     }
      
      }
-   
-
    console.log("this are the nodes :", nodes);
-   console.log("this are the nodes :", nodes_set);
-
-
+   //console.log("this are the nodes :", nodes_set);
 }
 
-// }
 
 function check_duplicate(n){
   console.log("this should check is something is duplicate");
@@ -269,9 +251,9 @@ return max;
 }
 
 
-setInterval(function() {
+setTimeout(function() {
 
-  console.log("Get he lider");
+  console.log("Get the lider");
   //console.log(toSend.nodeID);
   //console.log("this is the leader", leadership());
   console.log("this is the leader in the list of nodes", leadership());
@@ -287,87 +269,70 @@ setInterval(function() {
 
 this_leader();
 
-  
-
- 
 }, 8000);
 
 function this_leader(){
- 
-  
+  //check if you are on the current hostname and if you are the leader
   if(nodes.some( h => h.hostname === myhostname) && leadership().hostname == myhostname ){
-  
     console.log("U are on the current leader", toSend);
-    current_leader = leadership();
+    var current_leader = leadership();
+    // if it is the leader it will check the current nodes, to know if someone is not sending messages.
     check_nodes(current_leader);
-
-
   }
 }
 
 function check_nodes(current){
   
-  //var dss = new Date();
   var current_node_time = current.time;
-  //var date1 = moment(current_node_time);
-  //var date2 = moment(dss);
-  //var diff = date2.diff(date1,'minutes');
-  //var test_alive = await check_alive(current_node_time)
-  
+ 
   set_not_alive(current_node_time, current);
-  //console.log("this is the time of the node that may be dead", current_node_time);
+  
   console.log("Plaese work time");
   
 }
 
-// function check_alive(current_node_time){
-//   var date1 = moment(current_node_time);  
-//   console.log("I hope this is looping");
-//   return new Promise((resolve,reject) =>{
-//     nodes.forEach((i) =>{
-//       var date2 = moment(i.time);
-//       var diff = date1.diff(date2,'minutes');
-//       if(diff == 2){
-//         resolve(i);
-//       }else{
-//         reject("error")
-//       }
-//     })
-//   });
-
-// }
 
 function set_not_alive(current_node_time, current){
   var date1 = moment(current_node_time);
-  var time_alive = 0;
-  var container_dead = {}
+  //var time_alive = 0;
+  //var container_dead = {}
   nodes.forEach((i) =>{
     var date2 = moment(i.time);
     var diff = date1.diff(date2,'minutes');
-    console.log("element", i.nodeID, "this is the different", diff, "this are the compared");
+    console.log("This node", i.nodeID, "this is the difference", diff, "this are the compared with leader", current.nodeID);
     time_alive = diff;
     container_dead = i;
-    if(diff >=2){
+    if(Math.abs(diff) >=2){
       i.status = "dead";
     }
   })
- if(time_alive >=2){
-   get_container_info(container_dead);
- }
- else if(nodes.some( i => i.status === "dead")){
-  console.log("is dead");
-  var this_dead = nodes.find(e => e.status === "dead");
-  get_container_info(this_dead);
- }
+//  if(time_alive >=2){
+//    get_container_info(container_dead);
+//  }
+//   if(nodes.some( i => i.status === "dead")){
+//   console.log("is dead");
+//   var this_dead = nodes.find(e => e.status === "dead");
+//   get_container_info(this_dead);
+//  }
+
+for(var i=0; i < nodes.length; i ++){
+  if(nodes[i].hasOwnProperty('status')){
+    if(nodes[i].status == "dead"){
+      get_container_info(nodes[i]);
+    }
+  }
+
+}
 
 }
 
 function get_container_info(container_dead){
   
   
-  console.log("this container is dead", container_dead)
+  console.log("this container is or are dead", container_dead)
 
-  restartContainer(container_dead["hostname"]);
+  console.log("looping again");
+  //restartContainer(container_dead["hostname"]);
 
 }
 
@@ -400,42 +365,42 @@ async function restartContainer(container_id){
 // Cmd: ["echo", "hello world from LJMU cloud computing", "new_container.js"],
 //   };
 
-const containerName = "containertest";
+// const containerName = "containertest";
 
-const containerDetails = {
-  Image: "alpine",    
-  WORKDIR: "/usr/src/app",  
-  Cmd: ["echo", "hello world from LJMU cloud computing"],
-    };
-
-
+// const containerDetails = {
+//   Image: "alpine",    
+//   WORKDIR: "/usr/src/app",  
+//   Cmd: ["echo", "hello world from LJMU cloud computing"],
+//     };
 
 
-async function createContainer(){
+
+
+// async function createContainer(){
   
-  console.log("It should create a container")
-  try{
-          // let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err)});
-          // console.log("Debuggin", res_check);  
-          //if (res_check == null){
+//   console.log("It should create a container")
+//   try{
+//           // let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err)});
+//           // console.log("Debuggin", res_check);  
+//           //if (res_check == null){
 
             
-            await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
-          //}
-            await axios.post(`${url}/containers/${containerName}/start`).then(function(response){console.log("This is the status", response.data)});
-            await axios.get(`${url}/containers/${containerName}/logs`).then(function(response){console.log("This is the status logs", response.data)});
+//             await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
+//           //}
+//             await axios.post(`${url}/containers/${containerName}/start`).then(function(response){console.log("This is the status", response.data)});
+//             await axios.get(`${url}/containers/${containerName}/logs`).then(function(response){console.log("This is the status logs", response.data)});
            
-          clearInterval(id_set_please);
-          console.log("Check if it works");
+//           clearInterval(id_set_please);
+//           console.log("Check if it works");
           
-      }
-      catch(error)
-      {
-          console.log(error);
-      }
-  }
+//       }
+//       catch(error)
+//       {
+//           console.log(error);
+//       }
+//   }
 
 
-var id_set_please = setTimeout(async function(){createContainer()},20000);
+// var id_set_please = setTimeout(async function(){createContainer()},20000);
 
 
