@@ -305,8 +305,13 @@ function check_nodes(current){
     
 
   }else{
-    console.log("The leader has never died therefore we can check the other nodes");
-    set_not_alive(current_node_time, current);
+    
+    if(nodes.some( h => h.hostname === myhostname) && leadership().hostname == myhostname){
+      console.log("The leader has never died therefore we can check the other nodes");
+      set_not_alive(current_node_time, current);
+    }
+    console.log("It seems the leader is still alive so we can continue");
+    
   }
   
   
