@@ -414,7 +414,7 @@ async function check_leader_status(id_host, nodeLeader){
     if(current_status == false){
       await axios.post(`${url}/containers/${id_host}/restart`).then(function(response){
         if(response.status == 204){
-          var new_id =  sort_algorithm() - 1;
+          var new_id =  min_algorithm() - 1;
           console.log("THis will be the new id", new_id);
           toSend["nodeID"] = new_id;
           nodeLeader.nodeID = new_id;
@@ -438,7 +438,7 @@ async function check_leader_status(id_host, nodeLeader){
 
 
 
-function sort_algorithm(){
+function min_algorithm(){
 
   var min = nodes[0];
 for(var i = 0; i < nodes.length; i++ ){
