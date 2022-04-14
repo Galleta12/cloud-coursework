@@ -332,11 +332,11 @@ function get_container_info(container_dead){
   console.log("this container is or are dead", container_dead)
 
   console.log("looping again");
-  //restartContainer(container_dead["hostname"]);
+  restartContainer(container_dead["hostname"],  container_dead);
 
 }
 
-async function restartContainer(container_id){
+async function restartContainer(container_id, current_node_checking){
   
  // http://192.168.56.40:2375/containers/b380d257868d/json
     try{
@@ -351,6 +351,16 @@ async function restartContainer(container_id){
             console.log("Container restart", response.status)
           }
           console.log(response.status)});
+      }else{
+        console.log("This container is not receving messages however is not dead", current_node_checking);
+        current_node_checking.status = "alive";
+        console.log("This is not dead", current_node_checking);
+        console.log("if we have another node that is with status dead with a recursive call we will restart it");
+        if(nodes.some( i => i.status === "dead")){
+          console.log("other node that is dead");
+          var second_dead = nodes.find(e => e.status === "dead");
+          return restartContainer(second_dead["hostname"],second_dead);
+         }
       }
     }
     catch(error)
