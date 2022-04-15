@@ -447,7 +447,7 @@ async function check_leader_status(id_host, nodeLeader){
 function wait_min(please_id){
   
   return new Promise((resolve, reject)=>{
-    console.log("hopefully is looping");
+    console.log("hopefully is looping", please_id);
     setTimeout(() =>{
       resolve(please_id);
     }, 300);
@@ -456,8 +456,10 @@ function wait_min(please_id){
 
  async function min_algorithm(){
    var min = nodes[0];
+   console.log("This is first value to loop", min);
    nodes.forEach(async (item) =>{ 
-    var min_please= await wait_min(item.nodeID)
+    console.log("Please loop here");
+    var min_please= await wait_min(item.nodeID);
     if(min_please < min){
       min = min_please;
     }  
