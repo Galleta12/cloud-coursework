@@ -438,7 +438,7 @@ async function check_leader_status(id_host, nodeLeader){
 
 
 
-
+// a few more lines and the algorithm will be done
 
 // const wait_mins = stop_min => 
 //       new Promise(resolve =>     
