@@ -417,7 +417,6 @@ async function check_leader_status(id_host, nodeLeader){
           var new_ids =  await min_algorithm();
           var new_id = await new_ids;
           console.log("THis will be the new id", new_id);
-          toSend["nodeID"] = new_id;
           nodeLeader.nodeID = new_id;
           nodeLeader.leader = false;   
           console.log("Container will change the id to be assigned to other one", nodeLeader);
@@ -459,17 +458,17 @@ function wait_min(please_id){
    var mins = nodes[0];
    var min = nodes[0].nodeID;
    console.log("This is first value to loop", mins);
-   console.log("This is the id", mins);
+   console.log("This is the id", min);
    nodes.forEach(async (item) =>{ 
     console.log("Please loop here");
     var min_please= await wait_min(item.nodeID);
     console.log("Check if this pass");
     if(min_please < min){
-      print("Check if is waiting condition");
+      console.log("Check if is waiting condition");
       min = await min_please;
-      print("Thhis is the new min", min);
+      console.log("Thhis is the new min", min);
     } else{
-      print("Condition not satified");
+      console.log("Condition not satified");
     } 
    })
    return new Promise((resolve, reject) =>{
