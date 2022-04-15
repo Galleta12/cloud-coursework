@@ -462,7 +462,7 @@ function wait_min(please_id){
     console.log("Please loop here");
     var min_please= await wait_min(item.nodeID);
     if(min_please < min){
-      min = min_please;
+      min = await min_please;
     }  
    })
    return new Promise((resolve, reject) =>{
