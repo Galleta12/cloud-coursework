@@ -414,7 +414,8 @@ async function check_leader_status(id_host, nodeLeader){
     if(current_status == false){
       await axios.post(`${url}/containers/${id_host}/restart`).then(async function(response){
         if(response.status == 204){
-          var new_id =  await min_algorithm();
+          var new_ids =  await min_algorithm();
+          var new_id = await new_ids;
           console.log("THis will be the new id", new_id);
           toSend["nodeID"] = new_id;
           nodeLeader.nodeID = new_id;
