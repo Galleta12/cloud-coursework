@@ -456,15 +456,21 @@ function wait_min(please_id){
 }
 
  async function min_algorithm(){
-   var min = nodes[0];
-   console.log("This is first value to loop", min);
+   var mins = nodes[0];
+   var min = nodes[0].nodeID;
+   console.log("This is first value to loop", mins);
+   console.log("This is the id", mins);
    nodes.forEach(async (item) =>{ 
     console.log("Please loop here");
     var min_please= await wait_min(item.nodeID);
+    console.log("Check if this pass");
     if(min_please < min){
+      print("Check if is waiting condition");
       min = await min_please;
       print("Thhis is the new min", min);
-    }  
+    } else{
+      print("Condition not satified");
+    } 
    })
    return new Promise((resolve, reject) =>{
      resolve(min - 1);
