@@ -414,7 +414,7 @@ async function check_leader_status(id_host, nodeLeader){
     if(current_status == false){
       await axios.post(`${url}/containers/${id_host}/restart`).then(function(response){
         if(response.status == 204){
-          var new_id =  min_algorithm();
+          var new_id =  await min_algorithm();
           console.log("THis will be the new id", new_id);
           toSend["nodeID"] = new_id;
           nodeLeader.nodeID = new_id;
@@ -440,21 +440,31 @@ async function check_leader_status(id_host, nodeLeader){
 
 
 
-const wait_min = stop_min =>
-    new Promise(resolve =>
-      setTimeout(() => resolve(stop_min), 60)
-      );
+// const wait_mins = stop_min => 
+//       new Promise(resolve =>     
+//         setTimeout(() => resolve(stop_min), 60)
+//       );
+function wait_min(please_id){
+  
+  return new Promise((resolve, reject)=>{
+    console.log("hopefully is looping");
+    setTimeout(() =>{
+      resolve(please_id);
+    }, 300);
+  });
+}
 
  async function min_algorithm(){
    var min = nodes[0];
-   for(var i = 0; i < nodes.length; i++ ){
-    const wait_value = await wait_min(nodes[i].nodeID); 
-    if(min.nodeID > wait_value){
-       min = nodes[i];
-     }
-   }
-   
-   return min -1;
+   nodes.forEach(async (item) =>{ 
+    var min_please= await wait_min(item.nodeID)
+    if(min_please < min){
+      min = min_please;
+    }  
+   })
+   return new Promise((resolve, reject) =>{
+     resolve(min - 1);
+   })
    
    }
 
