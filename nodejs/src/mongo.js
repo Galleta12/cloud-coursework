@@ -201,7 +201,7 @@ async function save_list(nn){
   }
   if (please_work_x === true){
     console.log("Container change the leader id, :", n.leader_change);
-    (nodes.find(e => e.nodeID === n.leader_change[0])).nodeID = n.leader_change[1];   
+    (nodes.find(l => l.leader === true )).nodeID = n.leader_change[1];   
   }
  
   var ds = new Date();
