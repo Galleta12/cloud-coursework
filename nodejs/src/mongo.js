@@ -28,6 +28,7 @@ const port = 3000
 
 var os = require("os");
 const { resolve } = require('path');
+const { Console } = require('console');
 var myhostname = os.hostname();
 
 //connection string listing the mongo servers. This is an alternative to using a load balancer. THIS SHOULD BE DISCUSSED IN YOUR ASSIGNMENT.
@@ -190,12 +191,17 @@ setTimeout(function(){a()},5000);
 async function save_list(nn){
   var n = await nn;
   var please_work = n.hasOwnProperty('node_delete');
+  var please_work_x = n.hasOwnProperty('leader_change');
   console.log("This is what it receive regardingo to the deth node", please_work);
 
   if (please_work === true){
     console.log("This should work please, :", n.node_delete);
   nodes = nodes.filter(x => x.nodeID !== n.node_delete);
   
+  }
+  if (please_work_x === true){
+    console.log("Container change the leader id, :", n.leader_change);
+    (nodes.find(e => e.nodeID === n.leader_change[0])).nodeID = n.leader_change[1];   
   }
  
   var ds = new Date();
@@ -449,14 +455,17 @@ async function check_leader_status(id_host, nodeLeader){
     var current_status= await res.data.State.Running;
     console.log("THis is the current status of the leader that is not receiving messages", current_status);
     if(current_status == false){
-
+          var for_change = []
           var new_ids =  await min_algorithm();
           var new_id = await new_ids;
+          for_change.push(nodeLeader.nodeID);
+          for_change.push(new_id);
           console.log("THis will be the new id", new_id);
           nodeLeader.nodeID = new_id;
           nodeLeader.leader = false;   
           console.log("Container will change the id to be assigned to other one", nodeLeader);
           console.log("Like that other will be the leader");
+          toSend.leader_change = for_change;
          
         console.log(response.status)
         return false
@@ -526,42 +535,60 @@ function wait_min(please_id){
 // Cmd: ["echo", "hello world from LJMU cloud computing", "new_container.js"],
 //   };
 
-// const containerName = "containertest";
+const containerName = "containertest";
 
-// const containerDetails = {
-//   Image: "alpine",    
-//   WORKDIR: "/usr/src/app",  
-//   Cmd: ["echo", "hello world from LJMU cloud computing"],
-//     };
-
+const containerDetails = {
+  Image: "Cloud-container_node1_1",    
+  Cmd: ["echo", "hello world from LJMU cloud computing"],
+    };
 
 
 
-// async function createContainer(){
+
+async function createContainer(){
   
-//   console.log("It should create a container")
-//   try{
-//           // let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err)});
-//           // console.log("Debuggin", res_check);  
-//           //if (res_check == null){
+  console.log("It should create a container")
+  try{
+          // let res_check = await axios.get(`${url}/containers/${containerName}/json`).catch(function(err){console.log(err)});
+          // console.log("Debuggin", res_check);  
+          //if (res_check == null){
 
             
-//             await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
-//           //}
-//             await axios.post(`${url}/containers/${containerName}/start`).then(function(response){console.log("This is the status", response.data)});
-//             await axios.get(`${url}/containers/${containerName}/logs`).then(function(response){console.log("This is the status logs", response.data)});
+            await axios.post(`${url}/containers/create?name=${containerName}`, containerDetails).then(function(response){console.log(response.data)});
+          //}
+            await axios.post(`${url}/containers/${containerName}/start`).then(function(response){console.log("This is the status", response.data)});
+            //await axios.get(`${url}/containers/${containerName}/logs`).then(function(response){console.log("This is the status logs", response.data)});
            
-//           clearInterval(id_set_please);
-//           console.log("Check if it works");
+          //clearInterval(id_set_please);
+          console.log("Check if it works");
           
-//       }
-//       catch(error)
-//       {
-//           console.log(error);
-//       }
-//   }
+      }
+      catch(error)
+      {
+          console.log(error);
+      }
+  }
+
+  
+  function deploy(){
+    var now = new Date();
+    //var deploy_date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0);
+    console.log("This is the current time for the deply", now);
+    if (now > new Date (`${now.getDate}` + '21:55:00')){
+          Console.log("Time to deploy");
+          createContainer();
+    }
+    
+    
+  }
+ 
+  setTimeout(function(){deploy()},10000);
+  
+  //setTimeout(function(){alert("It's 10am!")}, millisTill10);
 
 
-// var id_set_please = setTimeout(async function(){createContainer()},20000);
+
+
+ //setTimeout(async function(){createContainer()},millisTill10);
 
 
