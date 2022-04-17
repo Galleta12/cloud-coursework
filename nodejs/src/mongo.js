@@ -196,7 +196,7 @@ async function save_list(nn){
 
   if (please_work === true){
     console.log("This should work please, :", n.node_delete);
-  nodes = nodes.filter(x => x.nodeID !== n.node_delete);
+    nodes = nodes.filter(x => x.nodeID !== n.node_delete);
   
   }
   if (please_work_x === true){
