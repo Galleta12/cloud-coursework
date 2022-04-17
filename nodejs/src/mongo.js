@@ -339,8 +339,8 @@ async function check_nodes(current){
     var please =  await check_leader_status(current["hostname"], current);
     if (please == true){
      
-      
-      if(nodes.includes(toSend["hostname"])){
+      if(nodes.some( i => i.hostname === toSend["hostname"]))
+      {
         console.log("The node leader is still alive, therefore the time will be updated");
         current.time = dss;
       }else{
