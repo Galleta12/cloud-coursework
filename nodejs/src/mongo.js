@@ -233,8 +233,12 @@ async function save_list(nn){
       console.log("this node was remove:", deleted);
       nodes = nodes.filter(x => x.status !== "noNode");
       
-
-
+    }
+    
+    else if(n.hasOwnProperty('node_delete')){
+      console.log("This should work please, :", n.node_delete);
+      nodes = nodes.filter(x => x.nodeID !== n.node_delete);
+      
     }
    console.log("this are the nodes :", nodes);
    //console.log("this are the nodes :", nodes_set);
@@ -357,6 +361,7 @@ function set_not_alive(current_node_time, current){
     }
     else if(Math.abs(diff) >=5){
       i.status = "noNode";
+      toSend.node_delete = i.nodeID;
     }
   })
 //  if(time_alive >=2){
@@ -404,6 +409,7 @@ async function restartContainer(container_id, current_node_checking){
         await axios.post(`${url}/containers/${container_id}/restart`).then(function(response){
           if(response.status == 204){
             current_node_checking.status = "restart";
+            toSend.node_delete = current_node_checking.nodeID;
             console.log("Container restart", current_node_checking);
             console.log("This node was restarted therefore we will need to delete the node from the array");
            
@@ -445,6 +451,7 @@ async function check_leader_status(id_host, nodeLeader){
           nodeLeader.leader = false;   
           console.log("Container will change the id to be assigned to other one", nodeLeader);
           console.log("Like that other will be the leader");
+         
           
         }
         console.log(response.status)});
