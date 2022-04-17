@@ -215,6 +215,27 @@ async function save_list(nn){
     }
      
      }
+
+     else if(nodes.some( r => r.status === "restart")){
+       console.log("An container inside the id was deleted therefore we need to delete it from the array");
+       var deleted = nodes.find(d => d.status === "restart");
+       console.log("this node was remove:", deleted);
+       nodes = nodes.filter(x => x.status !== "restart" );
+       
+
+
+     }
+
+     else if(nodes.some( m => m.status === "noNode")){
+      console.log("An container inside the the array is not receiving messages, so it is possible that there is a problem in the array");
+      console.log("So is better if we deleted");
+      var deleted = nodes.find(d => d.status === "noNode");
+      console.log("this node was remove:", deleted);
+      nodes = nodes.filter(x => x.status !== "noNode");
+      
+
+
+    }
    console.log("this are the nodes :", nodes);
    //console.log("this are the nodes :", nodes_set);
 }
@@ -334,6 +355,9 @@ function set_not_alive(current_node_time, current){
     if(Math.abs(diff) >=2){
       i.status = "dead";
     }
+    else if(Math.abs(diff) >=5){
+      i.status = "noNode";
+    }
   })
 //  if(time_alive >=2){
 //    get_container_info(container_dead);
@@ -366,7 +390,8 @@ function get_container_info(container_dead){
 }
 
 async function restartContainer(container_id, current_node_checking){
-  
+    
+    
  // http://192.168.56.40:2375/containers/b380d257868d/json
     try{
   
@@ -378,11 +403,10 @@ async function restartContainer(container_id, current_node_checking){
         console.log("This node is dead", current_status, "This node", current_node_checking );
         await axios.post(`${url}/containers/${container_id}/restart`).then(function(response){
           if(response.status == 204){
-            current_node_checking.status = "alive";
+            current_node_checking.status = "restart";
             console.log("Container restart", current_node_checking);
             console.log("This node was restarted therefore we will need to delete the node from the array");
-            nodes = nodes.filter(x => x.hostname !== container_id );
-            console.log("this node was remove:", container_id);
+           
           }
           console.log(response.status)});
       }else{
