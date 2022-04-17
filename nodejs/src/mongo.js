@@ -503,7 +503,9 @@ function wait_min(please_id){
     } 
    })
    return new Promise((resolve, reject) =>{
-     resolve(min - 1);
+    setTimeout(() =>{
+      resolve(min - 1);
+    }, 1050); 
    })
    
    }
