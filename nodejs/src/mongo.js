@@ -200,8 +200,10 @@ async function save_list(nn){
   
   }
   if (please_work_x === true){
-    console.log("Container change the leader id, :", n.leader_change);
-    (nodes.find(l => l.leader === true )).nodeID = n.leader_change[1];   
+    var  changes = n["leader_change"];
+    
+    console.log("Container change the leader id, :", changes[1], changes[0]);
+    (nodes.find(l => l.leader === true )).nodeID = changes[1];   
   }
  
   var ds = new Date();
@@ -570,25 +572,25 @@ async function createContainer(){
   }
 
   
-  function deploy(){
-    var now = new Date();
-    //var deploy_date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0);
-    console.log("This is the current time for the deply", now);
-    if (now > new Date (`${now.getDate}` + '22:10:00')){
-          Console.log("Time to deploy");
-          createContainer();
-    }
+  // function deploy(){
+  //   var now = new Date();
+  //   //var deploy_date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0);
+  //   console.log("This is the current time for the deply", now);
+  //   if (now > new Date (`${now.getDate}` + '22:30:00')){
+  //         Console.log("Time to deploy");
+  //         createContainer();
+  //   }
     
     
-  }
+  // }
  
-  setInterval(function(){deploy()},2000);
+  //setInterval(function(){deploy()},2000);
   
   //setTimeout(function(){alert("It's 10am!")}, millisTill10);
 
 
 
 
- //setTimeout(async function(){createContainer()},millisTill10);
+ setTimeout(async function(){createContainer()},300000);
 
 
