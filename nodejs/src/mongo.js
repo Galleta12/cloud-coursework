@@ -489,7 +489,7 @@ function wait_min(please_id){
     console.log("Check if this pass");
     if(min_please < min){
       console.log("Check if is waiting condition");
-      mins = item;
+      min = await min_please;
       console.log("Thhis is the new min", min);
     } else{
       console.log("Condition not satified");
