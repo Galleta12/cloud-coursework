@@ -467,7 +467,7 @@ async function check_leader_status(id_host, nodeLeader){
           console.log("Like that other will be the leader");
           toSend.leader_change = for_change;
          
-        console.log(response.status)
+       
         return false
     }
     else
@@ -538,7 +538,7 @@ function wait_min(please_id){
 const containerName = "containertest";
 
 const containerDetails = {
-  Image: "Cloud-container_node1_1",    
+  Image: "cloud-container_node1_1",    
   Cmd: ["echo", "hello world from LJMU cloud computing"],
     };
 
@@ -574,7 +574,7 @@ async function createContainer(){
     var now = new Date();
     //var deploy_date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0);
     console.log("This is the current time for the deply", now);
-    if (now > new Date (`${now.getDate}` + '21:55:00')){
+    if (now > new Date (`${now.getDate}` + '22:00:00')){
           Console.log("Time to deploy");
           createContainer();
     }
