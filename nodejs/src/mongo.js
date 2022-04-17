@@ -538,7 +538,7 @@ function wait_min(please_id){
 const containerName = "containertest";
 
 const containerDetails = {
-  Image: "cloud-container_node1_1",    
+  Image: "cloud-coursework_node1",    
   Cmd: ["echo", "hello world from LJMU cloud computing"],
     };
 
