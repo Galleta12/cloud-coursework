@@ -574,7 +574,7 @@ async function createContainer(){
     var now = new Date();
     //var deploy_date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0);
     console.log("This is the current time for the deply", now);
-    if (now > new Date (`${now.getDate}` + '22:00:00')){
+    if (now > new Date (`${now.getDate}` + '22:10:00')){
           Console.log("Time to deploy");
           createContainer();
     }
@@ -582,7 +582,7 @@ async function createContainer(){
     
   }
  
-  setTimeout(function(){deploy()},10000);
+  setInterval(function(){deploy()},2000);
   
   //setTimeout(function(){alert("It's 10am!")}, millisTill10);
 
