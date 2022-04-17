@@ -191,7 +191,13 @@ async function save_list(nn){
   var n = await nn;
   var please_work = n.hasOwnProperty('node_delete');
   console.log("This is what it receive regardingo to the deth node", please_work);
+
+  if (please_work === true){
+    console.log("This should work please, :", n.node_delete);
+  nodes = nodes.filter(x => x.nodeID !== n.node_delete);
   
+  }
+ 
   var ds = new Date();
   //var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
   nodes_set.add(n["hostname"]);
@@ -236,7 +242,7 @@ async function save_list(nn){
       
     }
     
-    else if(please_work == true){
+    else if(please_work === true){
       console.log("This should work please, :", n.node_delete);
       nodes = nodes.filter(x => x.nodeID !== n.node_delete);
       
