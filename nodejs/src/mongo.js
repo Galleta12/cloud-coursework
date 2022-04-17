@@ -449,8 +449,7 @@ async function check_leader_status(id_host, nodeLeader){
     var current_status= await res.data.State.Running;
     console.log("THis is the current status of the leader that is not receiving messages", current_status);
     if(current_status == false){
-      await axios.post(`${url}/containers/${id_host}/restart`).then(async function(response){
-        if(response.status == 204){
+
           var new_ids =  await min_algorithm();
           var new_id = await new_ids;
           console.log("THis will be the new id", new_id);
@@ -459,11 +458,10 @@ async function check_leader_status(id_host, nodeLeader){
           console.log("Container will change the id to be assigned to other one", nodeLeader);
           console.log("Like that other will be the leader");
          
-          
-        }
-        console.log(response.status)});
+        console.log(response.status)
         return false
-    }else
+    }
+    else
     {
       return true
     }
