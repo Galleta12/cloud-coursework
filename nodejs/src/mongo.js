@@ -338,8 +338,17 @@ async function check_nodes(current){
     console.log("This would mean that the leader is not receiving messages because a container is dead or the leader itself is dead");
     var please =  await check_leader_status(current["hostname"], current);
     if (please == true){
-      console.log("The node leader is still alive, therefore the time will be updated");
-      current.time = dss;
+     
+      
+      if(nodes.includes(toSend["hostname"])){
+        console.log("The node leader is still alive, therefore the time will be updated");
+        current.time = dss;
+      }else{
+        
+        console.log("The leader doesn't exist therefore we will delete it");
+        toSend.node_delete = leadership().nodeID;
+      }
+      
     }
 
     
@@ -591,6 +600,6 @@ async function createContainer(){
 
 
 
- setTimeout(async function(){createContainer()},300000);
+ //setTimeout(async function(){createContainer()},9000);
 
 
