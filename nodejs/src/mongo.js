@@ -223,7 +223,7 @@ async function save_list(nn){
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;    
      }
   
-     else if(nodes.length < 3){
+     else if(nodes.length < 4){
       
       if(!nodes.includes(n["hostname"]) ){
       if(!nodes.includes(n["nodeID"])){
