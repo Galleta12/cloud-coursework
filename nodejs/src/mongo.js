@@ -191,7 +191,7 @@ setTimeout(function(){a()},5000);
 async function save_list(nn){
   var n = await nn;
   var please_work = n.hasOwnProperty('node_delete');
-  var please_work_x = n.hasOwnProperty('leader_change');
+  
   console.log("This is what it receive regardingo to the deth node", please_work);
 
   if (please_work === true){
@@ -199,12 +199,7 @@ async function save_list(nn){
     nodes = nodes.filter(x => x.nodeID !== n.node_delete);
   
   }
-  if (please_work_x === true){
-    var  changes = n["leader_change"];
-    
-    console.log("Container change the leader id, :", changes[1], changes[0]);
-    (nodes.find(l => l.leader === true )).nodeID = changes[1];   
-  }
+  
  
   var ds = new Date();
   //var texts = ds.getFullYear() + ":"+ ds.getDate() + ":" + ds.getHours()+":" + ds.getMinutes();
@@ -466,17 +461,17 @@ async function check_leader_status(id_host, nodeLeader){
     var current_status= await res.data.State.Running;
     console.log("THis is the current status of the leader that is not receiving messages", current_status);
     if(current_status == false){
-          var for_change = []
+          var save_id = nodeLeader.nodeID;
           var new_ids =  await min_algorithm();
           var new_id = await new_ids;
-          for_change.push(nodeLeader.nodeID);
-          for_change.push(new_id);
+          
           console.log("THis will be the new id", new_id);
           nodeLeader.nodeID = new_id;
-          nodeLeader.leader = false;   
+          nodeLeader.leader = false;
+          toSend.node_delete = save_id;   
           console.log("Container will change the id to be assigned to other one", nodeLeader);
           console.log("Like that other will be the leader");
-          toSend.leader_change = for_change;
+         
          
        
         return false
@@ -550,9 +545,15 @@ const containerName = "containertest";
 
 const containerDetails = {
   Image: "cloud-coursework_node1",    
-  Cmd: ["echo", "hello world from LJMU cloud computing"],
+  Hostname: "nodejscluster_node1_4",
+  NetworkingConfig: {
+    EndpointsConfig: {
+      "cloud-coursework_default": {},
+    },
+  },
     };
 
+   
 
 
 
@@ -600,6 +601,6 @@ async function createContainer(){
 
 
 
- //setTimeout(async function(){createContainer()},9000);
+ setTimeout(async function(){createContainer()},30000);
 
 
