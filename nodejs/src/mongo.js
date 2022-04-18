@@ -195,6 +195,8 @@ setTimeout(function(){a()},5000);
 async function save_list(nn){
   var n = await nn;
   var please_work = n.hasOwnProperty('node_delete');
+  var please_work_pl = n.hasOwnProperty('new_leader_id');
+
   
   console.log("This is what it receive regardingo to the deth node", please_work);
 
@@ -205,10 +207,22 @@ async function save_list(nn){
   
   
   if (please_work === true){
-    console.log("This should work please, :", n.node_delete);
-    nodes = nodes.filter(x => x.nodeID !== n.node_delete);
+    if(please_work_pl === true){
+         if(leadership().nodeID == n.node_delete){
+          console.log("Change id");
+          (nodes.find(e => e.leader === true)).nodeID = n.new_leader_id;
+            
+         }
+         console.log("nothing happne");
+    }else{
+      console.log("This should work please, :", n.node_delete);
+      nodes = nodes.filter(x => x.nodeID !== n.node_delete);
+    }
+    
+   
   
   }
+ 
   
  
   var ds = new Date();
@@ -473,7 +487,8 @@ async function check_leader_status(id_host, nodeLeader){
           console.log("THis will be the new id", new_id);
           nodeLeader.nodeID = new_id;
           nodeLeader.leader = false;
-          toSend.node_delete = save_id;   
+          toSend.node_delete = save_id;
+          toSend.new_leader_id = new_id   
           console.log("Container will change the id to be assigned to other one", nodeLeader);
           console.log("Like that other will be the leader");
          
@@ -579,7 +594,7 @@ async function createContainer(){
 
   const rule = new schedule.RecurrenceRule();
   rule.hour = 20;
-  rule.minute = 20;
+  rule.minute = 35;
   
   
   const job = schedule.scheduleJob(rule, function(){
