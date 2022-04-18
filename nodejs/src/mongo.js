@@ -201,7 +201,10 @@ async function save_list(nn){
   console.log("This is what it receive regardingo to the deth node", please_work);
 
   if(n.hostname == "nodejscluster_node1_4" && !nodes.includes(n["hostname"]) ){
-        nodes.push(n);
+    if(nodes.length < 4){
+      nodes.push(n);
+    }    
+    
   }
   
   
@@ -597,8 +600,8 @@ async function createContainer(){
   }
 
   const rule = new schedule.RecurrenceRule();
-  rule.hour = 20;
-  rule.minute = 47;
+  rule.hour = 17;
+  rule.minute = 00;
   
   
   const job = schedule.scheduleJob(rule, function(){
