@@ -7,7 +7,7 @@ var request = require('request');
 const axios = require("axios");
 //This is the URL endopint of your vm running docker
 var url = 'http://192.168.56.30:2375';
-//const schedule = require('node-schedule');
+const schedule = require('node-schedule');
 
 
 
