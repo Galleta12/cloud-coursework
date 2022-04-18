@@ -170,7 +170,7 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
-                                    if(m.hostname == "nodejscluster_node1_4" && !nodes.some( i => i.hostname === m.hostname)){
+                                    if(msg.content.hostname == "nodejscluster_node1_4" && !nodes.some( i => i.hostname === m.hostname)){
                                      nodes.push(JSON.parse(m));
                                     }
                                     else{
@@ -574,7 +574,7 @@ async function createContainer(){
 
   const rule = new schedule.RecurrenceRule();
   rule.hour = 18;
-  rule.minute = 25;
+  rule.minute = 33;
   
   
   const job = schedule.scheduleJob(rule, function(){
