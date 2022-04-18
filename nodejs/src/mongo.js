@@ -198,9 +198,9 @@ async function save_list(nn){
   
   console.log("This is what it receive regardingo to the deth node", please_work);
 
-  // if(n.hostname == "nodejscluster_node1_4" && !nodes.includes(n["hostname"]) ){
-  //       nodes.push(n);
-  // }
+  if(n.hostname == "nodejscluster_node1_4" && !nodes.includes(n["hostname"]) ){
+        nodes.push(n);
+  }
   
   
   
@@ -223,7 +223,7 @@ async function save_list(nn){
       (nodes.find(e => e.nodeID === n["nodeID"])).time = ds;    
      }
   
-     else if(nodes.length < 4){
+     else if(nodes.length < 3){
       
       if(!nodes.includes(n["hostname"]) ){
       if(!nodes.includes(n["nodeID"])){
@@ -578,18 +578,18 @@ async function createContainer(){
   }
 
   const rule = new schedule.RecurrenceRule();
-  rule.hour = 19;
-  rule.minute = 55;
+  rule.hour = 20;
+  rule.minute = 00;
   
   
   const job = schedule.scheduleJob(rule, function(){
     createContainer();
   });
 
-if(leadership().hostname == myhostname){
-  job;
-}
-
+// if(leadership().hostname == myhostname){
+//   job;
+// }
+job;
 
  //setTimeout(async function(){createContainer()},30000);
 
