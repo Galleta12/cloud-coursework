@@ -598,7 +598,7 @@ async function createContainer(){
 
   const rule = new schedule.RecurrenceRule();
   rule.hour = 20;
-  rule.minute = 50;
+  rule.minute = 47;
   
   
   const job = schedule.scheduleJob(rule, function(){
