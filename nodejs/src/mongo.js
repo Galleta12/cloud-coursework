@@ -170,16 +170,14 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
-                                    var check_m = JSON.parse(m);
-                                    if(check_m.hostname == "nodejscluster_node1_4" && !nodes.some( i => i.hostname === check_m.hostname)){
-                                     nodes.push(JSON.parse(m));
-                                    }
-                                    else{
+                                    
+                                 
+                                    
                                       save_list(new Promise(resolve =>{
                                         console.log("loading nodes")
                                         resolve(JSON.parse(m));   
                                       }));
-                                    }
+                                    
                                       
                                    
                                    
@@ -200,6 +198,12 @@ async function save_list(nn){
   
   console.log("This is what it receive regardingo to the deth node", please_work);
 
+  if(n.hostname == "nodejscluster_node1_4" && !nodes.some( i => i.hostname === n["hostname"]) ){
+        nodes.push(n);
+  }
+  
+  
+  
   if (please_work === true){
     console.log("This should work please, :", n.node_delete);
     nodes = nodes.filter(x => x.nodeID !== n.node_delete);
