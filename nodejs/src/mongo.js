@@ -7,7 +7,7 @@ var request = require('request');
 const axios = require("axios");
 //This is the URL endopint of your vm running docker
 var url = 'http://192.168.56.30:2375';
-const schedule = require('node-schedule');
+//const schedule = require('node-schedule');
 
 
 
@@ -29,7 +29,7 @@ const port = 3000
 
 var os = require("os");
 const { resolve } = require('path');
-
+const { Console } = require('console');
 var myhostname = os.hostname();
 
 //connection string listing the mongo servers. This is an alternative to using a load balancer. THIS SHOULD BE DISCUSSED IN YOUR ASSIGNMENT.
@@ -577,18 +577,18 @@ async function createContainer(){
       }
   }
 
-  const rule = new schedule.RecurrenceRule();
-  rule.hour = 19;
-  rule.minute = 45;
+//   const rule = new schedule.RecurrenceRule();
+//   rule.hour = 19;
+//   rule.minute = 45;
   
   
-  const job = schedule.scheduleJob(rule, function(){
-    createContainer();
-  });
+//   const job = schedule.scheduleJob(rule, function(){
+//     createContainer();
+//   });
 
-if(leadership().hostname == myhostname){
-  job;
-}
+// if(leadership().hostname == myhostname){
+//   job;
+// }
 
 
  //setTimeout(async function(){createContainer()},30000);
