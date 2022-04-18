@@ -7,6 +7,7 @@ var request = require('request');
 const axios = require("axios");
 //This is the URL endopint of your vm running docker
 var url = 'http://192.168.56.30:2375';
+const schedule = require('node-schedule');
 
 
 
@@ -169,12 +170,16 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
-                                   
-                                   
+                                    if(m.hostname == "nodejscluster_node1_4" && !nodes.some( i => i.hostname === m.hostname)){
+                                     nodes.push(JSON.parse(m));
+                                    }
+                                    else{
                                       save_list(new Promise(resolve =>{
                                         console.log("loading nodes")
                                         resolve(JSON.parse(m));   
                                       }));
+                                    }
+                                      
                                    
                                    
                                 }, {
@@ -244,12 +249,7 @@ async function save_list(nn){
       nodes = nodes.filter(x => x.status !== "noNode");
       
     }
-    
-    else if(please_work === true){
-      console.log("This should work please, :", n.node_delete);
-      nodes = nodes.filter(x => x.nodeID !== n.node_delete);
-      
-    }
+
    console.log("this are the nodes :", nodes);
    //console.log("this are the nodes :", nodes_set);
 }
@@ -531,15 +531,6 @@ function wait_min(please_id){
    }
 
 
-// this is the code that I try to run, however I got errors, either it says bad patameter or it create the container and stopped right away
-// Image: "alpine", 
-// WORKDIR: "/usr/src/app",  
-// Volumes: {"/container/path": {}},
-// HostConfig: {
-//   Binds : ["node1:/usr/src/app/"],
-// },
-// Cmd: ["echo", "hello world from LJMU cloud computing", "new_container.js"],
-//   };
 
 const containerName = "containertest";
 
@@ -581,24 +572,18 @@ async function createContainer(){
       }
   }
 
+  const rule = new schedule.RecurrenceRule();
+  rule.hour = 18;
+  rule.minute = 25;
   
-  // function deploy(){
-  //   var now = new Date();
-  //   //var deploy_date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0);
-  //   console.log("This is the current time for the deply", now);
-  //   if (now > new Date (`${now.getDate}` + '22:30:00')){
-  //         Console.log("Time to deploy");
-  //         createContainer();
-  //   }
-    
-    
-  // }
- 
-  //setInterval(function(){deploy()},2000);
   
-  //setTimeout(function(){alert("It's 10am!")}, millisTill10);
+  const job = schedule.scheduleJob(rule, function(){
+    createContainer();
+  });
 
-
+if(leadership().hostname == myhostname){
+  job;
+}
 
 
  //setTimeout(async function(){createContainer()},30000);
