@@ -29,7 +29,7 @@ const port = 3000
 
 var os = require("os");
 const { resolve } = require('path');
-const { Console } = require('console');
+
 var myhostname = os.hostname();
 
 //connection string listing the mongo servers. This is an alternative to using a load balancer. THIS SHOULD BE DISCUSSED IN YOUR ASSIGNMENT.
