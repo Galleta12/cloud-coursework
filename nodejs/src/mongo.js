@@ -212,8 +212,12 @@ async function save_list(nn){
           console.log("Change id");
           (nodes.find(e => e.leader === true)).nodeID = n.new_leader_id;
             
+         }else{
+          console.log("Please Please, :", n.node_delete);
+            nodes = nodes.filter(x => x.nodeID !== n.node_delete);
+          console.log("nothing happne");
          }
-         console.log("nothing happne");
+         
     }else{
       console.log("This should work please, :", n.node_delete);
       nodes = nodes.filter(x => x.nodeID !== n.node_delete);
