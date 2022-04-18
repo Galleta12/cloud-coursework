@@ -170,7 +170,8 @@ amqp.connect('amqp://test:test@cloud-coursework_haproxy_1', function(error0, con
                     channel.consume(queue, function(msg) {
                                     console.log(" [x] Received %s", msg.content.toString());
                                     var m = msg.content.toString();
-                                    if(msg.content.hostname == "nodejscluster_node1_4" && !nodes.some( i => i.hostname === m.content.hostname)){
+                                    var check_m = JSON.parse(m);
+                                    if(check_m.hostname == "nodejscluster_node1_4" && !nodes.some( i => i.hostname === check_m.hostname)){
                                      nodes.push(JSON.parse(m));
                                     }
                                     else{
