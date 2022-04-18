@@ -577,18 +577,18 @@ async function createContainer(){
       }
   }
 
-//   const rule = new schedule.RecurrenceRule();
-//   rule.hour = 19;
-//   rule.minute = 45;
+  const rule = new schedule.RecurrenceRule();
+  rule.hour = 19;
+  rule.minute = 55;
   
   
-//   const job = schedule.scheduleJob(rule, function(){
-//     createContainer();
-//   });
+  const job = schedule.scheduleJob(rule, function(){
+    createContainer();
+  });
 
-// if(leadership().hostname == myhostname){
-//   job;
-// }
+if(leadership().hostname == myhostname){
+  job;
+}
 
 
  //setTimeout(async function(){createContainer()},30000);
