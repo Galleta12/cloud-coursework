@@ -1,6 +1,6 @@
  6130COMP-Cloud-Coursework
 
-This is a cloud base applicatin developed during my bachelors studies.
+This is a cloud base applicaiton developed during my bachelors studies.
 
 
 To start this applicaiton you need Ubuntu and Docker installed.
